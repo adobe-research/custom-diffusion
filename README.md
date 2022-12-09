@@ -98,7 +98,7 @@ For more details please refer to our paper.
 
 ```
 @article{kumari2022customdiffusion,
-  title={Multi-concept Customization of Text-to-Image Diffusion},
+  title={Multi-Concept Customization of Text-to-Image Diffusion},
   author={Kumari, Nupur and Zhang, Bingliang and Zhang, Richard and Shechtman, Eli and Zhu, Jun-Yan},
   journal = {arXiv},
   year = {2022}
