@@ -15,9 +15,44 @@
 ***Multi-Concept Customization of Text-to-Image Diffusion*** <br>
 [Nupur Kumari](https://nupurkmr9.github.io/), Bingliang Zhang, [Richard Zhang](https://richzhang.github.io/), [Eli Shechtman](https://research.adobe.com/person/eli-shechtman/), [Jun-Yan Zhu](https://www.cs.cmu.edu/~junyanz/)<br>
 
-## Code
+## Getting Started
 
-We plan on releasing code, models, and data in December 2022. Stay tuned!!
+Our code builds on [Stable Diffusion](https://github.com/CompVis/stable-diffusion). 
+
+
+```
+git clone git@github.com:adobe-research/custom-diffusion.git
+cd custom-diffusion
+git clone https://github.com/CompVis/stable-diffusion.git
+cd stable-diffusion
+conda env create -f environment.yaml
+conda activate ldm
+
+```
+
+For downloading the model checkpoint, please refer [here](https://huggingface.co/CompVis/stable-diffusion-v1-4).
+
+### Single-Concept Fine-tuning
+
+**Real images as regularization**
+
+
+**Generated images as regularization**
+
+
+### Multi-Concept Fine-tuning
+
+**Joint Training**
+
+
+**Optimization**
+
+
+### Fine-tuning on human faces
+
+
+
+
 
 ## Results
 

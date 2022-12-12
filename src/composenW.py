@@ -14,7 +14,7 @@ import numpy as np
 from tqdm import tqdm
 from scipy.linalg import lu_factor, lu_solve
 
-sys.path.append(".")
+sys.path.append("../stable-diffusion")
 from omegaconf import OmegaConf
 from ldm.util import instantiate_from_config
 from ldm.models.diffusion.ddim import DDIMSampler
@@ -31,9 +31,9 @@ def load_model_from_config(config, ckpt):
     return model
 
 
-def get_model():
-    config = OmegaConf.load("configs/stable-diffusion/v1-inference.yaml")
-    model = load_model_from_config(config, "models/ldm/stable-diffusion-v1/model-v1-4.ckpt")
+def get_model(path):
+    config = OmegaConf.load("../stable-diffusion/configs/stable-diffusion/v1-inference.yaml")
+    model = load_model_from_config(config, path)
     return model, config
 
 
@@ -65,8 +65,8 @@ def gdupdateWexact(K, V, Ktarget1, Vtarget1, W, device='cuda'):
     return Wnew
 
 
-def compose(paths, category, outpath, prompts=None, device='cuda'):
-    model, config = get_model()
+def compose(paths, category, outpath, pretrained_model_path, regularization_prompt, prompts=None, device='cuda'):
+    model, config = get_model(pretrained_model_path)
     model.eval()
     model.requires_grad = False
 
@@ -103,11 +103,11 @@ def compose(paths, category, outpath, prompts=None, device='cuda'):
 
                 tokens = tokens["input_ids"]
                 end = torch.nonzero(tokens == 49407)[:, 1].min()
-                if 'a photo of' in each[:15]:
-                    print(each)
-                    uc.append((model.get_learned_conditioning(1 * [each])[:, 4:end+1]).reshape(-1, 768))
+                if 'a photo of' in text[:15]:
+                    print(text)
+                    uc.append((model.get_learned_conditioning(1 * [text])[:, 4:end+1]).reshape(-1, 768))
                 else:
-                    uc.append((model.get_learned_conditioning(1 * [each])[:, 1:end+1]).reshape(-1, 768))
+                    uc.append((model.get_learned_conditioning(1 * [text])[:, 1:end+1]).reshape(-1, 768))
 
         return torch.cat(uc, 0)
 
@@ -123,7 +123,7 @@ def compose(paths, category, outpath, prompts=None, device='cuda'):
     for path1, cat1 in zip(paths.split('+'), category.split('+')):
         model2_st = torch.load(path1)
         if 'embed' in model2_st['state_dict']:
-            config.model.params.cond_stage_config.target = 'ldm.modules.encoders.custom_modules.FrozenCLIPEmbedderWrapper'
+            config.model.params.cond_stage_config.target = 'src.custom_modules.FrozenCLIPEmbedderWrapper'
             embeds.append(model2_st['state_dict']['embed'][-1:])
             num_added_tokens1 = tokenizer.add_tokens(f'<new{count}>')
             modifier_token_id1 = tokenizer.convert_tokens_to_ids('<new1>')
@@ -144,7 +144,7 @@ def compose(paths, category, outpath, prompts=None, device='cuda'):
     token_embeds = model.cond_stage_model.transformer.get_input_embeddings().weight.data
     token_embeds[-embeds.size(0):] = embeds
 
-    f = open('./final_data/laoinn_saved.txt', 'r')
+    f = open(regularization_prompt, 'r')
     prompt = [x.strip() for x in f.readlines()][:200]
     uc = get_text_embedding(prompt)
 
@@ -272,7 +272,11 @@ def parse_args():
                         type=str)
     parser.add_argument('--categories', help='+ separated list of categories of the models', default='moongate',
                         type=str)
-    parser.add_argument('--prompts', help='prompts for composition model (can be a file or string)', default='',
+    parser.add_argument('--prompts', help='prompts for composition model (can be a file or string)', default=None,
+                        type=str)
+    parser.add_argument('--pretrained_model_path', default="/grogu/user/nkumari/data_custom_diffusion/model-v1-4.ckpt",
+                        type=str)
+    parser.add_argument('--regularization_prompt', default='/grogu/user/nkumari/data_custom_diffusion/final_data/laoinn_saved.txt',
                         type=str)
     return parser.parse_args()
 
