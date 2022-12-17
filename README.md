@@ -15,6 +15,65 @@
 ***Multi-Concept Customization of Text-to-Image Diffusion*** <br>
 [Nupur Kumari](https://nupurkmr9.github.io/), [Bingliang Zhang](https://zhangbingliang2019.github.io), [Richard Zhang](https://richzhang.github.io/), [Eli Shechtman](https://research.adobe.com/person/eli-shechtman/), [Jun-Yan Zhu](https://www.cs.cmu.edu/~junyanz/)<br>
 
+
+
+## Results
+
+All our results are based on fine-tuning [stable-diffusion-v1-4](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original) model.
+We show results on various category of images including scene, pet, personal toy, and style, and with varying number of training samples. 
+For more generations and comparison with concurrent methods please refer to our [webpage](https://www.cs.cmu.edu/~custom-diffusion/) and [gallery](https://www.cs.cmu.edu/~custom-diffusion/results.html).
+
+
+### Single-Concept Results
+
+<div>
+<p align="center">
+<img src='assets/tortoise_plushy.jpg' align="center" width=800>
+</p>
+<p align="center">
+<img src='assets/teddybear.jpg' align="center" width=800>
+</p>
+<p align="center">
+<img src='assets/art.jpg' align="center" width=800>
+</p>
+<p align="center">
+<img src='assets/art2.jpg' align="center" width=800>
+</p>
+<p align="center">
+<img src='assets/moongate.jpg' align="center" width=800>
+</p>
+<p align="center">
+<img src='assets/barn.jpg' align="center" width=800>
+</p>
+<p align="center">
+<img src='assets/cat.jpg' align="center" width=800>
+</p>
+<p align="center">
+<img src='assets/dog.jpg' align="center" width=800>
+</p>
+</div>
+
+
+
+### Multi-Concept Results
+
+
+<div>
+<p align="center">
+<img src='assets/woodenpot_cat.jpg' align="center" width=800>
+</p>
+<p align="center">
+<img src='assets/table_chair.jpg' align="center" width=800>
+</p>
+<p align="center">
+<img src='assets/woodenpot_flower.jpg' align="center" width=800>
+</p>
+<p align="center">
+<img src='assets/chair_cat.jpg' align="center" width=800>
+</p>
+</div>
+
+
 ## Getting Started
 
 ```
@@ -149,69 +208,12 @@ python sample.py --prompt "<new1> cat playing with a ball" --delta_ckpt logs/<fo
 ```
 
 
-## Results
-
-All our results are based on fine-tuning [stable-diffusion-v1-4](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original) model.
-We show results on various category of images including scene, pet, personal toy, and style, and with varying number of training samples. 
-For more generations and comparison with concurrent methods please refer to our [webpage](https://www.cs.cmu.edu/~custom-diffusion/) and [gallery](https://www.cs.cmu.edu/~custom-diffusion/results.html).
-
-
-### Single-Concept Results
-
-<div>
-<p align="center">
-<img src='assets/tortoise_plushy.png' align="center" width=800>
-</p>
-<p align="center">
-<img src='assets/teddybear.png' align="center" width=800>
-</p>
-<p align="center">
-<img src='assets/art.jpg' align="center" width=800>
-</p>
-<p align="center">
-<img src='assets/art2.jpg' align="center" width=800>
-</p>
-<p align="center">
-<img src='assets/moongate.png' align="center" width=800>
-</p>
-<p align="center">
-<img src='assets/barn.png' align="center" width=800>
-</p>
-<p align="center">
-<img src='assets/cat.png' align="center" width=800>
-</p>
-<p align="center">
-<img src='assets/dog.png' align="center" width=800>
-</p>
-</div>
-
-
-
-### Multi-Concept Results
-
-
-<div>
-<p align="center">
-<img src='assets/woodenpot_cat.png' align="center" width=800>
-</p>
-<p align="center">
-<img src='assets/table_chair.png' align="center" width=800>
-</p>
-<p align="center">
-<img src='assets/woodenpot_flower.png' align="center" width=800>
-</p>
-<p align="center">
-<img src='assets/chair_cat.png' align="center" width=800>
-</p>
-</div>
-
-
 ## Method Details
 
 
 <div>
 <p align="center">
-<img src='assets/methodology.png' align="center" width=900>
+<img src='assets/methodology.jpg' align="center" width=900>
 </p>
 </div>
 
