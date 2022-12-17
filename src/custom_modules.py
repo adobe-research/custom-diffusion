@@ -6,10 +6,9 @@
 #
 # ==========================================================================================
 #
-# Adobe’s modifications are Copyright 2019 Adobe. All rights reserved.
-# Adobe’s modifications are licensed under the Creative Commons Attribution-NonCommercial-ShareAlike
-# 4.0 International Public License (CC-NC-SA-4.0). To view a copy of the license, visit
-# https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.
+# Adobe’s modifications are Copyright 2022 Adobe Research. All rights reserved.
+# Adobe’s modifications are licensed under the Adobe Research License. To view a copy of the license, visit
+# LICENSE.md.
 #
 # ==========================================================================================
 #
@@ -209,9 +208,10 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-
+from packaging import version
 import torch
 import torch.nn as nn
+import transformers
 from transformers import CLIPTokenizer, CLIPTextModel
 
 
@@ -262,9 +262,14 @@ class FrozenCLIPEmbedderWrapper(AbstractEncoder):
         """
         input_shape = hidden_states.size()
         bsz, seq_len = input_shape[:2]
-        causal_attention_mask = self.transformer.text_model._build_causal_attention_mask(bsz, seq_len, hidden_states.dtype).to(
-            hidden_states.device
-        )
+        if version.parse(transformers.__version__) >= version.parse('4.21'):
+            causal_attention_mask = self.transformer.text_model._build_causal_attention_mask(bsz, seq_len, hidden_states.dtype).to(
+                hidden_states.device
+            )
+        else:
+            causal_attention_mask = self.transformer.text_model._build_causal_attention_mask(bsz, seq_len).to(
+                hidden_states.device
+            )
 
         encoder_outputs = self.transformer.text_model.encoder(
             inputs_embeds=hidden_states,

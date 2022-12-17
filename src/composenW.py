@@ -1,7 +1,6 @@
-# Copyright 2019 Adobe. All rights reserved.
-# Creative Commons Attribution-NonCommercial-ShareAlike
-# 4.0 International Public License (CC-NC-SA-4.0). To view a copy of the license, visit
-# https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.
+# Copyright 2022 Adobe Research. All rights reserved.
+# To view a copy of the license, visit LICENSE.md.
+
 
 import sys
 import os
@@ -14,7 +13,7 @@ import numpy as np
 from tqdm import tqdm
 from scipy.linalg import lu_factor, lu_solve
 
-sys.path.append("../stable-diffusion")
+sys.path.append("./")
 from omegaconf import OmegaConf
 from ldm.util import instantiate_from_config
 from ldm.models.diffusion.ddim import DDIMSampler
@@ -32,7 +31,7 @@ def load_model_from_config(config, ckpt):
 
 
 def get_model(path):
-    config = OmegaConf.load("../stable-diffusion/configs/stable-diffusion/v1-inference.yaml")
+    config = OmegaConf.load("configs/custom-diffusion/finetune.yaml")
     model = load_model_from_config(config, path)
     return model, config
 
@@ -65,7 +64,7 @@ def gdupdateWexact(K, V, Ktarget1, Vtarget1, W, device='cuda'):
     return Wnew
 
 
-def compose(paths, category, outpath, pretrained_model_path, regularization_prompt, prompts=None, device='cuda'):
+def compose(paths, category, outpath, pretrained_model_path, regularization_prompt, prompts, save_path, device='cuda'):
     model, config = get_model(pretrained_model_path)
     model.eval()
     model.requires_grad = False
@@ -224,7 +223,7 @@ def compose(paths, category, outpath, pretrained_model_path, regularization_prom
                 prompts = [batch_size * [prompt] for prompt in prompts]
                 print(prompts[0])
 
-        sample_path = os.path.join(f'optimized_logs/{outpath}/', 'samples')
+        sample_path = os.path.join(f'{save_path}/{outpath}/', 'samples')
         os.makedirs(sample_path, exist_ok=True)
         with torch.no_grad():
             for counter, prompt in enumerate(prompts):
@@ -254,29 +253,31 @@ def compose(paths, category, outpath, pretrained_model_path, regularization_prom
                 outim = model.decode_first_stage(outs[0])
                 outim = torch.clamp((outim + 1.0) / 2.0, min=0.0, max=1.0)
                 name = '-'.join(prompt[0].split(' '))
-                torchvision.utils.save_image(outim, f'optimized_logs/{outpath}/{counter}_{name}.jpg', nrow=batch_size // 2)
+                torchvision.utils.save_image(outim, f'{save_path}/{outpath}/{counter}_{name}.jpg', nrow=batch_size // 2)
 
     new_weights['embed'] = embeds
-    os.makedirs(f'optimized_logs/{outpath}', exist_ok=True)
-    os.makedirs(f'optimized_logs/{outpath}/checkpoints', exist_ok=True)
-    os.makedirs(f'optimized_logs/{outpath}/configs', exist_ok=True)
-    with open(f'optimized_logs/{outpath}/configs/config_project.yaml', 'w') as fp:
+    os.makedirs(f'{save_path}/{outpath}', exist_ok=True)
+    os.makedirs(f'{save_path}/{outpath}/checkpoints', exist_ok=True)
+    os.makedirs(f'{save_path}/{outpath}/configs', exist_ok=True)
+    with open(f'{save_path}/{outpath}/configs/config_project.yaml', 'w') as fp:
         OmegaConf.save(config=config, f=fp)
-    torch.save({'state_dict': new_weights}, f'optimized_logs/{outpath}/checkpoints/delta_epoch=000000.ckpt')
+    torch.save({'state_dict': new_weights}, f'{save_path}/{outpath}/checkpoints/delta_epoch=000000.ckpt')
 
 
 
 def parse_args():
     parser = argparse.ArgumentParser('', add_help=False)
-    parser.add_argument('--paths', help='+ separated list of checkpoints', default='logs/2022-10-20T02-29-24_moongate-sdv4_realdetachresize4/checkpoints/delta_epoch=000004.ckpt',
+    parser.add_argument('--paths', help='+ separated list of checkpoints', required=True,
                         type=str)
-    parser.add_argument('--categories', help='+ separated list of categories of the models', default='moongate',
+    parser.add_argument('--save_path', help='folder name to save  optimized weights', default='optimized_logs',
+                        type=str)
+    parser.add_argument('--categories', help='+ separated list of categories of the models', required=True,
                         type=str)
     parser.add_argument('--prompts', help='prompts for composition model (can be a file or string)', default=None,
                         type=str)
-    parser.add_argument('--pretrained_model_path', default="/grogu/user/nkumari/data_custom_diffusion/model-v1-4.ckpt",
+    parser.add_argument('--ckpt', required=True,
                         type=str)
-    parser.add_argument('--regularization_prompt', default='/grogu/user/nkumari/data_custom_diffusion/final_data/laoinn_saved.txt',
+    parser.add_argument('--regularization_prompt', default='./data/regularization_captions.txt',
                         type=str)
     return parser.parse_args()
 
@@ -290,4 +291,4 @@ if __name__ == "__main__":
     else:
         temp = categories
     outpath = '_'.join(['optimized', temp])
-    compose(paths, categories, outpath, args.prompts)
+    compose(paths, categories, outpath, args.ckpt, args.regularization_prompt, args.prompts, args.save_path)

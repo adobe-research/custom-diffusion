@@ -4,10 +4,9 @@
 #
 # ==========================================================================================
 #
-# Adobe’s modifications are Copyright 2019 Adobe. All rights reserved.
-# Adobe’s modifications are licensed under the Creative Commons Attribution-NonCommercial-ShareAlike
-# 4.0 International Public License (CC-NC-SA-4.0). To view a copy of the license, visit
-# https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.
+# Adobe’s modifications are Copyright 2022 Adobe Research. All rights reserved.
+# Adobe’s modifications are licensed under the Adobe Research License. To view a copy of the license, visit
+# LICENSE.md.
 #
 # ==========================================================================================
 #
@@ -149,7 +148,6 @@ class MaskBase(Dataset):
             else:
                 with open(reg_datapath, "r") as f:
                     self.image_paths2 = f.read().splitlines()
-                    self.image_paths2 = [x.replace('/sensei-fs/users/nupkumar/', '/grogu/user/nkumari/data_custom_diffusion/final_data/regularization_data/') for x in self.image_paths2]
             self._length2 = len(self.image_paths2)
 
         self.labels = {
@@ -236,7 +234,7 @@ class MaskBase(Dataset):
                 input_image1 = np.zeros((self.size, self.size, 3), dtype=np.float32)
                 input_image1[cx - random_scale // 2: cx + random_scale // 2, cy - random_scale // 2: cy + random_scale // 2, :] = image
 
-                mask = np.zeros((64, 64))
+                mask = np.zeros((self.size // 8, self.size // 8))
                 mask[(cx - random_scale // 2) // 8 + 1: (cx + random_scale // 2) // 8 - 1, (cy - random_scale // 2) // 8 + 1: (cy + random_scale // 2) // 8 - 1] = 1.
 
             elif random_scale > self.size:
@@ -249,20 +247,19 @@ class MaskBase(Dataset):
                 image = np.array(image).astype(np.uint8)
                 image = (image / 127.5 - 1.0).astype(np.float32)
                 input_image1 = image[cx - self.size // 2: cx + self.size // 2, cy - self.size // 2: cy + self.size // 2, :]
-
-                mask = np.ones((64, 64))
+                mask = np.ones((self.size // 8, self.size // 8))
             else:
                 if self.size is not None:
                     image = image.resize((self.size, self.size), resample=self.interpolation)
                 input_image1 = np.array(image).astype(np.uint8)
                 input_image1 = (input_image1 / 127.5 - 1.0).astype(np.float32)
-                mask = np.ones((64, 64))
+                mask = np.ones((self.size // 8, self.size // 8))
         else:
             if self.size is not None:
                 image = image.resize((self.size, self.size), resample=self.interpolation)
             input_image1 = np.array(image).astype(np.uint8)
             input_image1 = (input_image1 / 127.5 - 1.0).astype(np.float32)
-            mask = np.ones((64, 64))
+            mask = np.ones((self.size // 8, self.size // 8))
 
         example["image"] = input_image1
         example["mask"] = mask

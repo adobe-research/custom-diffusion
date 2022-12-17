@@ -285,6 +285,12 @@ def get_parser(**parser_kwargs):
         help="token added before cateogry word for personalization use case",
     )
     parser.add_argument(
+        "--freeze_model",
+        type=str,
+        default=None,
+        help="crossattn to enable fine-tuning of all key, value, query matrices",
+    )
+    parser.add_argument(
         "--repeat",
         type=int,
         default=0,
@@ -750,6 +756,8 @@ if __name__ == "__main__":
         
         if opt.resume_from_checkpoint_custom:
             config.model.params.ckpt_path = None
+        if opt.freeze_model is not None:
+            config.model.params.freeze_model = opt.freeze_model
 
         model = instantiate_from_config(config.model)
         if opt.resume_from_checkpoint_custom:

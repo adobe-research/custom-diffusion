@@ -4,10 +4,9 @@
 #
 # ==========================================================================================
 #
-# Adobe’s modifications are Copyright 2019 Adobe. All rights reserved.
-# Adobe’s modifications are licensed under the Creative Commons Attribution-NonCommercial-ShareAlike
-# 4.0 International Public License (CC-NC-SA-4.0). To view a copy of the license, visit
-# https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.
+# Adobe’s modifications are Copyright 2022 Adobe Research. All rights reserved.
+# Adobe’s modifications are licensed under the Adobe Research License. To view a copy of the license, visit
+# LICENSE.md.
 #
 # ==========================================================================================
 #
@@ -107,7 +106,7 @@ from contextlib import contextmanager, nullcontext
 from ldm.util import instantiate_from_config
 from ldm.models.diffusion.ddim import DDIMSampler
 from ldm.models.diffusion.plms import PLMSSampler
-
+import wandb
 
 def load_model_from_config(config, ckpt, verbose=False):
     print(f"Loading model from {ckpt}")
@@ -243,13 +242,13 @@ def main():
     parser.add_argument(
         "--config",
         type=str,
-        default="configs/custom-diffusion/finetune_aug.yaml",
+        default="configs/custom-diffusion/finetune.yaml",
         help="path to config which constructs model",
     )
     parser.add_argument(
         "--ckpt",
         type=str,
-        default="/grogu/user/nkumari/data_custom_diffusion/model-v1-4.ckpt",
+        required=True,
         help="path to checkpoint of the pre-trained model",
     )
     parser.add_argument(
@@ -271,14 +270,33 @@ def main():
         choices=["full", "autocast"],
         default="autocast"
     )
+    parser.add_argument(
+        "--wandb_log",
+        action='store_true',
+        help="save grid images to wandb.",
+    )
+    parser.add_argument(
+        "--compress",
+        action='store_true',
+        help="delta path provided is a compressed checkpoint.",
+    )
     opt = parser.parse_args()
+
+    if opt.wandb_log:
+        if opt.delta_ckpt is not None:
+            name = opt.delta_ckpt.split('/')[-3]
+        elif 'checkpoints' in opt.ckpt:
+            name = opt.ckpt.split('/')[-3]
+        else:
+            name = opt.ckpt.split('/')[-1]
+        wandb.init(project="custom-diffusion", entity="cmu-gil", name=name )
 
     if opt.delta_ckpt is not None:
         if len(glob.glob(os.path.join(opt.delta_ckpt.split('checkpoints')[0], "configs/*.yaml"))) > 0:
-            opt.config = sorted(glob.glob(os.path.join(opt.delta_ckpt.split('checkpoints')[0], "configs/*.yaml")))[1]
+            opt.config = sorted(glob.glob(os.path.join(opt.delta_ckpt.split('checkpoints')[0], "configs/*.yaml")))[-1]
     else:
         if len(glob.glob(os.path.join(opt.ckpt.split('checkpoints')[0], "configs/*.yaml"))) > 0:
-            opt.config = sorted(glob.glob(os.path.join(opt.ckpt.split('checkpoints')[0], "configs/*.yaml")))[1]
+            opt.config = sorted(glob.glob(os.path.join(opt.ckpt.split('checkpoints')[0], "configs/*.yaml")))[-1]
 
     seed_everything(opt.seed)
     config = OmegaConf.load(f"{opt.config}")
@@ -292,7 +310,12 @@ def main():
             del delta_st['state_dict']['embed']
             print(embed.shape)
         delta_st = delta_st['state_dict']
-        model.load_state_dict(delta_st, strict=False)
+        if opt.compress:
+            for name in delta_st.keys():
+                delta_st[name] = model.state_dict()[name] + delta_st[name]['u']@delta_st[name]['v']
+            model.load_state_dict(delta_st, strict=False)
+        else:
+            model.load_state_dict(delta_st, strict=False)
         if embed is not None:
             print("loading new embedding")
             print(model.cond_stage_model.transformer.text_model.embeddings.token_embedding.weight.data.shape)
@@ -384,6 +407,8 @@ def main():
                         img = Image.fromarray(grid.astype(np.uint8))
                         sampling_method = 'plms' if opt.plms else 'ddim'
                         img.save(os.path.join(outpath, f'{prompts[0].replace(" ", "-")}_{opt.scale}_{sampling_method}_{opt.ddim_steps}_{opt.ddim_eta}.png'))
+                        if opt.wandb_log:
+                            wandb.log({  f'{prompts[0].replace(" ", "-")}_{opt.scale}_{sampling_method}_{opt.ddim_steps}_{opt.ddim_eta}.png'  : [wandb.Image(img)]})
                         grid_count += 1
 
 
