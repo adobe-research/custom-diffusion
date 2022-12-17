@@ -10,7 +10,7 @@
 </p>
 </div>
 
-[Custom Diffusion](https://www.cs.cmu.edu/~custom-diffusion) is a method to fine-tune large-scale text-to-image diffusion models, e.g., [Stable Diffusion](https://github.com/CompVis/stable-diffusion), given few (~4-20) user-provided images of a new concept. Our method is computationally efficient (~6 minutes on 2 A100 GPUs) as it fine-tunes only a subset of model parameters, namely key and value projection matrices in the cross-attention layers of the diffusion model. This also results in low memory requirements for storing each additional concept model (75MB) apart from the pretrained model.
+[Custom Diffusion](https://www.cs.cmu.edu/~custom-diffusion) allows us to fine-tune text-to-image diffusion models, such as [Stable Diffusion](https://github.com/CompVis/stable-diffusion), given a few images of a new concept (~4-20). Our method is fast (~6 minutes on 2 A100 GPUs) as it fine-tunes only a subset of model parameters, namely key and value projection matrices, in the cross-attention layers. This also reduces the extra storage for each additional concept (75MB) apart from the pretrained model.
 
 ***Multi-Concept Customization of Text-to-Image Diffusion*** <br>
 [Nupur Kumari](https://nupurkmr9.github.io/), [Bingliang Zhang](https://zhangbingliang2019.github.io), [Richard Zhang](https://richzhang.github.io/), [Eli Shechtman](https://research.adobe.com/person/eli-shechtman/), [Jun-Yan Zhu](https://www.cs.cmu.edu/~junyanz/)<br>
@@ -99,7 +99,7 @@ Images taken from UnSpalsh are under [UnSplash LICENSE](https://unsplash.com/lic
 
 **Real images as regularization**
 ```
-## downloadd dataset
+## download dataset
 wget https://www.cs.cmu.edu/~custom-diffusion/assets/data.zip
 unzip data.zip
 
@@ -220,9 +220,9 @@ python sample.py --prompt "<new1> cat playing with a ball" --delta_ckpt logs/<fo
 
 Given the few user-provided images of a concept, our method augments a pre-trained text-to-image diffusion model, enabling new generations of the concept in unseen contexts. 
 We fine-tune a small subset of model weights, namely the key and value mapping from text to latent features in the cross-attention layers of the diffusion model. 
-Our method also uses a small set of regularization images (200) to prevent overfitting. For personal categories we add a new modifier token V* in front of the category name e.g., V* dog.
-For multiple-concepts we jointly train on the dataset for the two concepts. Our method also enables post-hoc merging of two fine-tuned models using optimization. 
-For more details please refer to our paper.  
+Our method also uses a small set of regularization images (200) to prevent overfitting. For personal categories, we add a new modifier token V* in front of the category name, e.g., V* dog.
+For multiple concepts, we jointly train on the dataset for the two concepts. Our method also enables the merging of two fine-tuned models using optimization. 
+For more details, please refer to our paper.  
 
 
 
