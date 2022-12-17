@@ -213,7 +213,8 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-
+import sys
+sys.path.append('./')
 import argparse
 import hashlib
 import itertools
@@ -240,7 +241,7 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import AutoTokenizer, PretrainedConfig
 
-import retrieve
+from src import retrieve
 
 logger = get_logger(__name__)
 
@@ -783,14 +784,15 @@ def main(args):
     if args.with_prior_preservation:
         class_images_dir = Path(args.class_data_dir)
         if not class_images_dir.exists():
-            class_images_dir.mkdir(parents=True)
+            class_images_dir.mkdir(parents=True, exist_ok=True)
         if args.real_prior:
-            name = '_'.join(args.class_prompt.split())
-            if not Path(os.path.join(class_images_dir, name)).exists() or len(list(Path(os.path.join(class_images_dir, name)).iterdir())) < args.num_class_images:
-                retrieve.retrieve(args.class_prompt, args.class_data_dir)
+            if accelerator.is_main_process:
+                name = '_'.join(args.class_prompt.split())
+                if not Path(os.path.join(class_images_dir, name)).exists() or len(list(Path(os.path.join(class_images_dir, name)).iterdir())) < args.num_class_images:
+                    retrieve.retrieve(args.class_prompt, args.class_data_dir)
             args.class_prompt = os.path.join(class_images_dir, 'caption.txt')
             args.class_data_dir = os.path.join(class_images_dir, 'images.txt')
-
+            accelerator.wait_for_everyone()
         else:
             cur_class_images = len(list(class_images_dir.iterdir()))
 

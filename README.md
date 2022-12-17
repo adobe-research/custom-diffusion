@@ -159,6 +159,7 @@ python sample.py --prompt "the <new2> cat sculpture in the style of a <new1> woo
 
 **Optimization based weights merging**
 
+Given two fine-tuned model weights `delta_ckpt1` and `delta_ckpt2` for any two categories, the weights can be merged to create a single model as shown below.  
 ```
 python src/composenW.py --paths <delta_ckpt1>+<delta_ckpt2> --categories  "wooden pot+cat"  --ckpt <pretrained-model-path> 
 
@@ -180,7 +181,7 @@ export MODEL_NAME="CompVis/stable-diffusion-v1-4"
 
 ## launch training script (2 GPUs recommended)
 
-CUDA_VISIBLE_DEVICES=4,5 accelerate launch src/diffuser_training.py \
+accelerate launch src/diffuser_training.py \
           --pretrained_model_name_or_path=$MODEL_NAME  \
           --instance_data_dir=./data/cat  \
           --class_data_dir=./real_reg/samples_cat/ \
@@ -190,9 +191,7 @@ CUDA_VISIBLE_DEVICES=4,5 accelerate launch src/diffuser_training.py \
           --class_prompt="cat" \
           --resolution=512  \
           --train_batch_size=2  \
-          --gradient_accumulation_steps=1  \
           --learning_rate=1e-5  \
-          --lr_scheduler="constant" \
           --lr_warmup_steps=0 \
           --max_train_steps=250 \
           --num_class_images=200 \
@@ -202,6 +201,7 @@ CUDA_VISIBLE_DEVICES=4,5 accelerate launch src/diffuser_training.py \
 ## sample 
 python src/sample_diffuser.py --delta_ckpt logs/cat/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt "<new1> cat playing with a ball"
 ```
+
 The above code is modified from the following [DreamBooth]( https://github.com/huggingface/diffusers/blob/main/examples/dreambooth/train_dreambooth.py) training script. For more details on how to setup accelarate please refere [here](https://github.com/huggingface/diffusers/blob/main/examples/dreambooth).
 
 ### Fine-tuning on human faces
