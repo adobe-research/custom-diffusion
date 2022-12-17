@@ -10,10 +10,13 @@
 </p>
 </div>
 
-[Custom Diffusion](https://www.cs.cmu.edu/~custom-diffusion) allows us to fine-tune text-to-image diffusion models, such as [Stable Diffusion](https://github.com/CompVis/stable-diffusion), given a few images of a new concept (~4-20). Our method is fast (~6 minutes on 2 A100 GPUs) as it fine-tunes only a subset of model parameters, namely key and value projection matrices, in the cross-attention layers. This also reduces the extra storage for each additional concept (75MB) apart from the pretrained model.
+[Custom Diffusion](https://www.cs.cmu.edu/~custom-diffusion) allows us to fine-tune text-to-image diffusion models, such as [Stable Diffusion](https://github.com/CompVis/stable-diffusion), given a few images of a new concept (~4-20). Our method is fast (~6 minutes on 2 A100 GPUs) as it fine-tunes only a subset of model parameters, namely key and value projection matrices, in the cross-attention layers. This also reduces the extra storage for each additional concept to 75MB.
+
+Our method further enables us to use a combination of mulitiple concepts such as new object + new artistic style, multiple new objects, and new object + new category. 
 
 ***Multi-Concept Customization of Text-to-Image Diffusion*** <br>
 [Nupur Kumari](https://nupurkmr9.github.io/), [Bingliang Zhang](https://zhangbingliang2019.github.io), [Richard Zhang](https://richzhang.github.io/), [Eli Shechtman](https://research.adobe.com/person/eli-shechtman/), [Jun-Yan Zhu](https://www.cs.cmu.edu/~junyanz/)<br>
+arXiv preprint arXiv:2212.04488 <br>
 
 
 
@@ -73,6 +76,22 @@ For more generations and comparisons with concurrent methods, please refer to ou
 </p>
 </div>
 
+
+
+
+## Method Details
+
+
+<div>
+<p align="center">
+<img src='assets/methodology.jpg' align="center" width=900>
+</p>
+</div>
+
+
+Given the few user-provided images of a concept, our method augments a pre-trained text-to-image diffusion model, enabling new generations of the concept in unseen contexts. 
+We fine-tune a small subset of model weights, namely the key and value mapping from text to latent features in the cross-attention layers of the diffusion model. 
+Our method also uses a small set of regularization images (200) to prevent overfitting. For personal categories, we add a new modifier token V* in front of the category name, e.g., V* dog. For multiple concepts, we jointly train on the dataset for the two concepts. Our method also enables the merging of two fine-tuned models using optimization. For more details, please refer to our [paper](https://arxiv.org/abs/2212.04488).  
 
 ## Getting Started
 
@@ -207,22 +226,6 @@ python src/compress.py --delta_ckpt <finetuned-delta-path> --ckpt <pretrained-mo
 python sample.py --prompt "<new1> cat playing with a ball" --delta_ckpt logs/<folder-name>/checkpoints/compressed_delta_epoch\=000004.ckpt --ckpt <pretrained-model-path> --compress
 ```
 
-
-## Method Details
-
-
-<div>
-<p align="center">
-<img src='assets/methodology.jpg' align="center" width=900>
-</p>
-</div>
-
-
-Given the few user-provided images of a concept, our method augments a pre-trained text-to-image diffusion model, enabling new generations of the concept in unseen contexts. 
-We fine-tune a small subset of model weights, namely the key and value mapping from text to latent features in the cross-attention layers of the diffusion model. 
-Our method also uses a small set of regularization images (200) to prevent overfitting. For personal categories, we add a new modifier token V* in front of the category name, e.g., V* dog.
-For multiple concepts, we jointly train on the dataset for the two concepts. Our method also enables the merging of two fine-tuned models using optimization. 
-For more details, please refer to our paper.  
 
 
 
