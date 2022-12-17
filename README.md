@@ -130,7 +130,7 @@ The above code is modified from the following [DreamBooth]( https://github.com/h
 
 For fine-tuning on human faces, we recommend `learning_rate=5e-6` and `max_train_steps=750` in the above diffuser training script or using `finetune_face.yaml` config in stable-diffusion training script. 
 
-We obeserve better results with lower learning rate and longer training. With less images, fine-tuning all parameters in the cross-attention is slightly better which can be enabled with `--freeze_model "crossattn"`.  
+We obeserve better results with lower learning rate, longer training, and more images for human faces compared to other categories shown in our paper. With less images, fine-tuning all parameters in the cross-attention is slightly better which can be enabled with `--freeze_model "crossattn"`.  
 Example results on fine-tuning with 14 close-up photos of [Richard Zhang](https://richzhang.github.io/) with the diffusers training script. 
 
 <div>
