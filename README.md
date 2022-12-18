@@ -202,7 +202,7 @@ accelerate launch src/diffuser_training.py \
 python src/sample_diffuser.py --delta_ckpt logs/cat/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt "<new1> cat playing with a ball"
 ```
 
-The above code is modified from the following [DreamBooth]( https://github.com/huggingface/diffusers/blob/main/examples/dreambooth/train_dreambooth.py) training script. For more details on how to setup accelarate please refere [here](https://github.com/huggingface/diffusers/blob/main/examples/dreambooth).
+The above code is modified from the following [DreamBooth]( https://github.com/huggingface/diffusers/blob/main/examples/dreambooth/train_dreambooth.py), [Textual Inversion](https://github.com/huggingface/diffusers/blob/main/examples/textual_inversion/textual_inversion.py) training scripts. For more details on how to setup accelarate please refere [here](https://github.com/huggingface/diffusers/blob/main/examples/dreambooth).
 
 ### Fine-tuning on human faces
 

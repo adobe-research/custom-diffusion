@@ -914,6 +914,7 @@ def main(args):
     
     # Adding a modifier token which is optimized ####
     # Code taken from https://github.com/huggingface/diffusers/blob/main/examples/textual_inversion/textual_inversion.py
+    modifier_token_id = None
     if args.modifier_token is not None:
         # Add the placeholder token in tokenizer
         num_added_tokens = tokenizer.add_tokens(args.modifier_token)
