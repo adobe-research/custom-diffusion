@@ -1,6 +1,6 @@
 # Custom Diffusion
 
-### [website](https://www.cs.cmu.edu/~custom-diffusion/)  |  [code](https://github.com/adobe-research/custom-diffusion)  | [paper](http://arxiv.org/abs/2212.04488)
+### [website](https://www.cs.cmu.edu/~custom-diffusion/)  |  [code](https://github.com/adobe-research/custom-diffusion)  | [paper](http://arxiv.org/abs/2212.04488) | [gradio demo](https://huggingface.co/spaces/nupurkmr9/custom-diffusion)
 
 
 <br>
