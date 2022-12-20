@@ -110,7 +110,7 @@ Our code was developed on the following commit `#21f890f9da3cfbeaba8e2ac3c425ee9
 For downloading the stable-diffusion model checkpoint, please refer [here](https://huggingface.co/CompVis/stable-diffusion-v1-4).
 
 **Dataset:** we release some of the datasets used in paper [here](https://www.cs.cmu.edu/~custom-diffusion/assets/data.zip). 
-Images taken from UnSpalsh are under [UnSplash LICENSE](https://unsplash.com/license). Moongate dataset can be downloaded from [here](https://github.com/odegeasslbc/FastGAN-pytorch). 
+Images taken from UnSplash are under [UnSplash LICENSE](https://unsplash.com/license). Moongate dataset can be downloaded from [here](https://github.com/odegeasslbc/FastGAN-pytorch).
 
 **Models:** all our models can be downloaded from [here](https://www.cs.cmu.edu/~custom-diffusion/assets/models/). 
 
@@ -202,7 +202,7 @@ accelerate launch src/diffuser_training.py \
 python src/sample_diffuser.py --delta_ckpt logs/cat/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt "<new1> cat playing with a ball"
 ```
 
-The above code is modified from the following [DreamBooth]( https://github.com/huggingface/diffusers/blob/main/examples/dreambooth/train_dreambooth.py), [Textual Inversion](https://github.com/huggingface/diffusers/blob/main/examples/textual_inversion/textual_inversion.py) training scripts. For more details on how to setup accelarate please refere [here](https://github.com/huggingface/diffusers/blob/main/examples/dreambooth).
+The above code is modified from the following [DreamBooth]( https://github.com/huggingface/diffusers/blob/main/examples/dreambooth/train_dreambooth.py), [Textual Inversion](https://github.com/huggingface/diffusers/blob/main/examples/textual_inversion/textual_inversion.py) training scripts. For more details on how to setup accelarate please refer [here](https://github.com/huggingface/diffusers/blob/main/examples/dreambooth).
 
 ### Fine-tuning on human faces
 
