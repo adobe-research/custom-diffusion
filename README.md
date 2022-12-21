@@ -1,6 +1,6 @@
 # Custom Diffusion
 
-### [website](https://www.cs.cmu.edu/~custom-diffusion/)  |  [code](https://github.com/adobe-research/custom-diffusion)  | [paper](http://arxiv.org/abs/2212.04488) | [gradio demo](https://huggingface.co/spaces/nupurkmr9/custom-diffusion)
+### [website](https://www.cs.cmu.edu/~custom-diffusion/)  | [paper](http://arxiv.org/abs/2212.04488) | [gradio demo](https://huggingface.co/spaces/nupurkmr9/custom-diffusion)
 
 
 <br>
@@ -218,7 +218,7 @@ CUDA_VISIBLE_DEVICES=2,3 accelerate launch src/diffuser_training.py \
           --concepts_list=./assets/concept_list.json \
           --with_prior_preservation --real_prior --prior_loss_weight=1.0 \
           --resolution=512  \
-          --train_batch_size=1  \
+          --train_batch_size=2  \
           --learning_rate=1e-5  \
           --lr_warmup_steps=0 \
           --max_train_steps=500 \
