@@ -208,7 +208,7 @@ python src/sample_diffuser.py --delta_ckpt logs/cat/delta.bin --ckpt "CompVis/st
 
 **Multi-Concept Fine-tuning**
 
-Provide a [json](assets/concept_list.json) file with the info about each concept.
+Provide a [json](assets/concept_list.json) file with the info about each concept, similar to [this](https://github.com/ShivamShrirao/diffusers/blob/main/examples/dreambooth/train_dreambooth.py).
 ```
 ## launch training script (2 GPUs recommended, increase --max_train_steps to 1000 if 1 GPU)
 
