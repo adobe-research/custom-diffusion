@@ -180,7 +180,7 @@ accelerate config
 export MODEL_NAME="CompVis/stable-diffusion-v1-4"
 ```
 
-### Single-Concept Fine-tuning
+**Single-Concept Fine-tuning**
 
 ```
 ## launch training script (2 GPUs recommended, increase --max_train_steps to 500 if 1 GPU)
@@ -206,7 +206,7 @@ accelerate launch src/diffuser_training.py \
 python src/sample_diffuser.py --delta_ckpt logs/cat/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt "<new1> cat playing with a ball"
 ```
 
-### Multi-Concept Fine-tuning
+**Multi-Concept Fine-tuning**
 
 Provide a [json](assets/concept_list.json) file with the info about each concept.
 ```
