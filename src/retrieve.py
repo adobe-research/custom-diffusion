@@ -10,8 +10,8 @@ from io import BytesIO
 from clip_retrieval.clip_client import ClipClient
 
 
-def retrieve(target_name, outpath):
-    num_images = 500
+def retrieve(target_name, outpath, num_class_images):
+    num_images = 2*num_class_images
     client = ClipClient(url="https://knn5.laion.ai/knn-service", indice_name="laion5B", num_images=num_images,  aesthetic_weight=0.1)
 
     if len(target_name.split()):
@@ -20,15 +20,13 @@ def retrieve(target_name, outpath):
         target = target_name
     os.makedirs(f'{outpath}/{target}', exist_ok=True)
 
-    # for files in glob.glob(f'{outpath}/{target}' + '/*'):
-    #     os.remove(files)
-    if len(list(Path(f'{outpath}/{target}').iterdir())) >= 200:
+    if len(list(Path(f'{outpath}/{target}').iterdir())) >= num_class_images:
         return
 
     while True:
         results = client.query(text=target_name)
-        if len(results) >= 200 or num_images > 1e4:
-            num_images = 500
+        if len(results) >= num_class_images or num_images > 1e4:
+            num_images = 2*num_class_images
             break
         else:
             num_images = 1.5*num_images
@@ -61,7 +59,7 @@ def retrieve(target_name, outpath):
                 count += 1
             except:
                 print("not an image")
-        if count > 200:
+        if count > num_class_images:
             break
 
     with open(f'{outpath}/caption.txt', 'w') as f:
@@ -83,9 +81,11 @@ def parse_args():
                         type=str)
     parser.add_argument('--outpath', help='path to save retrieved images', default='./',
                         type=str)
+    parser.add_argument('--num_class_images', help='number of retrieved images', default=200,
+                        type=int)
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     args = parse_args()
-    retrieve(args.target_name, args.outpath)
+    retrieve(args.target_name, args.outpath, args.num_class_images)

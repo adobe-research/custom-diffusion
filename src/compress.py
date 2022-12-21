@@ -6,7 +6,7 @@ import torch
 import argparse
 
 
-def compress(delta_ckpt, ckpt, device='cuda'):
+def compress(delta_ckpt, ckpt, compression_ratio=0.6, device='cuda'):
     st = torch.load(f'{delta_ckpt}')
     pretrained_st = torch.load(ckpt)['state_dict']
     for each in pretrained_st.keys():
@@ -35,7 +35,7 @@ def compress(delta_ckpt, ckpt, device='cuda'):
         all_ = (s).sum()
         for i, t in enumerate(s):
             explain += t/(all_)
-            if explain > .6:
+            if explain > compression_ratio:
                 break
         
         compressed_st['state_dict'][f'{name}'] = {}

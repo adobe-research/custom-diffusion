@@ -168,7 +168,7 @@ python sample.py --prompt "the <new2> cat sculpture in the style of a <new1> woo
 ```
 
 
-### Training on single-concept using Diffusers library
+### Training using Diffusers library
 
 ```
 ## install requirements 
@@ -178,8 +178,12 @@ pip install transformers>=4.25.1
 pip install deepspeed
 accelerate config
 export MODEL_NAME="CompVis/stable-diffusion-v1-4"
+```
 
-## launch training script (2 GPUs recommended)
+### Single-Concept Fine-tuning
+
+```
+## launch training script (2 GPUs recommended, increase --max_train_steps to 500 if 1 GPU)
 
 accelerate launch src/diffuser_training.py \
           --pretrained_model_name_or_path=$MODEL_NAME  \
@@ -202,13 +206,38 @@ accelerate launch src/diffuser_training.py \
 python src/sample_diffuser.py --delta_ckpt logs/cat/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt "<new1> cat playing with a ball"
 ```
 
+### Multi-Concept Fine-tuning
+
+Provide a [json](assets/concept_list.json) file with the info about each concept.
+```
+## launch training script (2 GPUs recommended, increase --max_train_steps to 1000 if 1 GPU)
+
+CUDA_VISIBLE_DEVICES=2,3 accelerate launch src/diffuser_training.py \
+          --pretrained_model_name_or_path=$MODEL_NAME  \
+          --output_dir=./logs/cat_wooden_pot  \
+          --concepts_list=./assets/concept_list.json \
+          --with_prior_preservation --real_prior --prior_loss_weight=1.0 \
+          --resolution=512  \
+          --train_batch_size=1  \
+          --learning_rate=1e-5  \
+          --lr_warmup_steps=0 \
+          --max_train_steps=500 \
+          --num_class_images=200 \
+          --scale_lr --hflip  \
+          --modifier_token "<new1>+<new2>" 
+
+## sample 
+python src/sample_diffuser.py --delta_ckpt logs/cat_wooden_pot/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt "<new1> cat sitting inside a <new2> wooden pot and looking up"
+```
+
+
 The above code is modified from the following [DreamBooth]( https://github.com/huggingface/diffusers/blob/main/examples/dreambooth/train_dreambooth.py), [Textual Inversion](https://github.com/huggingface/diffusers/blob/main/examples/textual_inversion/textual_inversion.py) training scripts. For more details on how to setup accelarate please refer [here](https://github.com/huggingface/diffusers/blob/main/examples/dreambooth).
 
 ### Fine-tuning on human faces
 
 For fine-tuning on human faces, we recommend `learning_rate=5e-6` and `max_train_steps=750` in the above diffuser training script or using `finetune_face.yaml` config in stable-diffusion training script. 
 
-We obeserve better results with lower learning rate, longer training, and more images for human faces compared to other categories shown in our paper. With less images, fine-tuning all parameters in the cross-attention is slightly better which can be enabled with `--freeze_model "crossattn"`.  
+We observe better results with a lower learning rate, longer training, and more images for human faces compared to other categories shown in our paper. With fewer images, fine-tuning all parameters in the cross-attention is slightly better, which can be enabled with `--freeze_model "crossattn"`.  
 Example results on fine-tuning with 14 close-up photos of [Richard Zhang](https://richzhang.github.io/) with the diffusers training script. 
 
 <div>
@@ -225,6 +254,13 @@ python src/compress.py --delta_ckpt <finetuned-delta-path> --ckpt <pretrained-mo
 ## sample
 python sample.py --prompt "<new1> cat playing with a ball" --delta_ckpt logs/<folder-name>/checkpoints/compressed_delta_epoch\=000004.ckpt --ckpt <pretrained-model-path> --compress
 ```
+
+Sample generations with different level of compression. By default our code saves the low-rank approximation with top 60% singular values to result in ~15 MB models. 
+<div>
+<p align="center">
+<img src='assets/compression.jpg' align="center" width=900>
+</p>
+</div>
 
 
 
