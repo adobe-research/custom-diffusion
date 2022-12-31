@@ -263,9 +263,14 @@ def create_custom_diffusion(unet, freeze_model):
             else:
                 params.requires_grad = False
 
-    def new_forward(self, hidden_states, context=None, mask=None):
+    def new_forward(self, hidden_states, **kwargs):
         batch_size, sequence_length, _ = hidden_states.shape
         crossattn = False
+        context = None
+        if 'context' in kwargs:
+            context = kwargs['context']
+        elif 'encoder_hidden_states' in kwargs:
+            context = kwargs['encoder_hidden_states']
         if context is not None:
             crossattn = True
 
@@ -339,7 +344,6 @@ def save_progress(text_encoder, unet, modifier_token_id, accelerator, args, save
 
 
 def load_model(text_encoder, tokenizer, unet, save_path, freeze_model='crossattn_kv'):
-    logger.info("loading embeddings")
     st = torch.load(save_path)
     if 'text_encoder' in st:
         text_encoder.load_state_dict(st['text_encoder'])
