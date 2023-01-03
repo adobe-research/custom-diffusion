@@ -16,15 +16,18 @@ def sample(ckpt, delta_ckpt, from_file, prompt, freeze_model):
     model_id = ckpt
     pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
 
+    outdir = 'outputs/txt2img-samples'
+    os.makedirs(outdir, exist_ok=True)
     if delta_ckpt is not None:
         diffuser_training.load_model(pipe.text_encoder, pipe.tokenizer, pipe.unet, delta_ckpt, freeze_model)
+        outdir = os.path.dirname(delta_ckpt)
 
     if prompt is not None:
         images = pipe([prompt]*5, num_inference_steps=200, guidance_scale=6., eta=1.).images
         images = np.hstack([np.array(x) for x in images])
         plt.imshow(images)
         plt.axis("off")
-        plt.savefig(f'{os.path.dirname(delta_ckpt)}/{prompt}.png', bbox_inches='tight')
+        plt.savefig(f'{outdir}/{prompt}.png', bbox_inches='tight')
     else:
         print(f"reading prompts from {from_file}")
         with open(from_file, "r") as f:
@@ -36,7 +39,7 @@ def sample(ckpt, delta_ckpt, from_file, prompt, freeze_model):
             images = np.hstack([np.array(x) for x in images], 0)
             plt.imshow(images)
             plt.axis("off")
-            plt.savefig(f'{os.path.dirname(delta_ckpt)}/{prompt[0]}.png', bbox_inches='tight')
+            plt.savefig(f'{outdir}/{prompt[0]}.png', bbox_inches='tight')
 
 
 def parse_args():

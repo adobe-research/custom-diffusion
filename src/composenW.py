@@ -13,7 +13,8 @@ import numpy as np
 from tqdm import tqdm
 from scipy.linalg import lu_factor, lu_solve
 
-sys.path.append("./")
+sys.path.append('stable-diffusion')
+sys.path.append('./')
 from omegaconf import OmegaConf
 from ldm.util import instantiate_from_config
 from ldm.models.diffusion.ddim import DDIMSampler
@@ -91,7 +92,7 @@ def compose(paths, category, outpath, pretrained_model_path, regularization_prom
     def get_text_embedding(prompts):
         with torch.no_grad():
             uc = []
-            for text in prompt:
+            for text in prompts:
                 tokens = tokenizer(text,
                                    truncation=True,
                                    max_length=77,
@@ -102,7 +103,7 @@ def compose(paths, category, outpath, pretrained_model_path, regularization_prom
 
                 tokens = tokens["input_ids"]
                 end = torch.nonzero(tokens == 49407)[:, 1].min()
-                if 'a photo of' in text[:15]:
+                if 'photo of a' in text[:15]:
                     print(text)
                     uc.append((model.get_learned_conditioning(1 * [text])[:, 4:end+1]).reshape(-1, 768))
                 else:
