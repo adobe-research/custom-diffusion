@@ -107,7 +107,7 @@ pip install clip-retrieval
 
 Our code was developed on the following commit `#21f890f9da3cfbeaba8e2ac3c425ee9e998d5229` of [stable-diffusion](https://github.com/CompVis/stable-diffusion).
 
-For downloading the stable-diffusion model checkpoint, please refer [here](https://huggingface.co/CompVis/stable-diffusion-v1-4).
+For downloading the stable-diffusion model checkpoint, please refer [here](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original).
 
 **Dataset:** we release some of the datasets used in paper [here](https://www.cs.cmu.edu/~custom-diffusion/assets/data.zip). 
 Images taken from UnSplash are under [UnSplash LICENSE](https://unsplash.com/license). Moongate dataset can be downloaded from [here](https://github.com/odegeasslbc/FastGAN-pytorch).

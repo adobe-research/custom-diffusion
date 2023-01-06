@@ -84,6 +84,7 @@ def convert(ckpt, delta_ckpt, newtoken, sd_version, config, compvis_to_diffuser=
             config.model.params.cond_stage_config.params = {}
             config.model.params.cond_stage_config.params.modifier_token = '+'.join([f'<new{i+1}>' for i in range(newtoken)])
 
+        torch.save(compvis_st, f'{os.path.dirname(delta_ckpt)}/delta_model.ckpt')
         for key in list(st['unet'].keys()):
             compvis_st['state_dict'][mapping_compvis_to_diffuser_rev[key]] = st['unet'][key]
 
