@@ -12,14 +12,14 @@ from diffusers import StableDiffusionPipeline
 from src import diffuser_training 
 
 
-def sample(ckpt, delta_ckpt, from_file, prompt, freeze_model):
+def sample(ckpt, delta_ckpt, from_file, prompt, compress, freeze_model):
     model_id = ckpt
     pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
 
     outdir = 'outputs/txt2img-samples'
     os.makedirs(outdir, exist_ok=True)
     if delta_ckpt is not None:
-        diffuser_training.load_model(pipe.text_encoder, pipe.tokenizer, pipe.unet, delta_ckpt, freeze_model)
+        diffuser_training.load_model(pipe.text_encoder, pipe.tokenizer, pipe.unet, delta_ckpt, compress, freeze_model)
         outdir = os.path.dirname(delta_ckpt)
 
     if prompt is not None:
@@ -52,6 +52,7 @@ def parse_args():
                         type=str)
     parser.add_argument('--prompt', help='prompt to generate', default=None,
                         type=str)
+    parser.add_argument("--compress", action='store_true')
     parser.add_argument('--freeze_model', help='crossattn or crossattn_kv', default='crossattn_kv',
                         type=str)
     return parser.parse_args()
@@ -59,4 +60,4 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    sample(args.ckpt, args.delta_ckpt, args.from_file, args.prompt, args.freeze_model)
+    sample(args.ckpt, args.delta_ckpt, args.from_file, args.prompt, args.compress, args.freeze_model)

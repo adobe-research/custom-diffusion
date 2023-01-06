@@ -343,7 +343,7 @@ def save_progress(text_encoder, unet, modifier_token_id, accelerator, args, save
     torch.save(delta_dict, save_path)
 
 
-def load_model(text_encoder, tokenizer, unet, save_path, freeze_model='crossattn_kv'):
+def load_model(text_encoder, tokenizer, unet, save_path, compress, freeze_model='crossattn_kv'):
     st = torch.load(save_path)
     if 'text_encoder' in st:
         text_encoder.load_state_dict(st['text_encoder'])
@@ -362,13 +362,18 @@ def load_model(text_encoder, tokenizer, unet, save_path, freeze_model='crossattn
             token_embeds[id_] = st['modifier_token'][modifier_tokens[i]]
 
     print(st.keys())
+    if compress:
+        assert freeze_model == 'crossattn_kv', 'Model compression is not supported when all attention params are fine-tuned'
     for name, params in unet.named_parameters():
         if freeze_model == 'crossattn':
             if 'attn2' in name:
                 params.data.copy_(st['unet'][f'{name}'])
         else:
             if 'attn2.to_k' in name or 'attn2.to_v' in name:
-                params.data.copy_(st['unet'][f'{name}'])
+                if compress:
+                    params.data += st['unet'][name]['u']@st['unet'][name]['v']
+                else:
+                    params.data.copy_(st['unet'][f'{name}'])
 
 
 def freeze_params(params):
