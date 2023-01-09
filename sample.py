@@ -312,7 +312,8 @@ def main():
         delta_st = delta_st['state_dict']
         if opt.compress:
             for name in delta_st.keys():
-                delta_st[name] = model.state_dict()[name] + delta_st[name]['u']@delta_st[name]['v']
+                if 'to_k' in name or 'to_v' in name:
+                    delta_st[name] = model.state_dict()[name] + delta_st[name]['u']@delta_st[name]['v']
             model.load_state_dict(delta_st, strict=False)
         else:
             model.load_state_dict(delta_st, strict=False)

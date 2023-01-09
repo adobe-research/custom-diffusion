@@ -30,22 +30,25 @@ def compress(delta_ckpt, ckpt, diffuser=False, compression_ratio=0.6, device='cu
     print("getting compression")
     layers = list(st.keys())
     for name in layers:
-        W = st[name].to(device)
-        Wpretrain = pretrained_st[name].clone().to(device)
-        deltaW = W-Wpretrain
+        if 'to_k' in name or 'to_v' in name:
+            W = st[name].to(device)
+            Wpretrain = pretrained_st[name].clone().to(device)
+            deltaW = W-Wpretrain
 
-        u, s, vt = torch.linalg.svd(deltaW.clone())
+            u, s, vt = torch.linalg.svd(deltaW.clone())
 
-        explain = 0
-        all_ = (s).sum()
-        for i, t in enumerate(s):
-            explain += t/(all_)
-            if explain > compression_ratio:
-                break
+            explain = 0
+            all_ = (s).sum()
+            for i, t in enumerate(s):
+                explain += t/(all_)
+                if explain > compression_ratio:
+                    break
 
-        compressed_st[compressed_key][f'{name}'] = {}
-        compressed_st[compressed_key][f'{name}']['u'] = (u[:, :i]@torch.diag(s)[:i, :i]).clone()
-        compressed_st[compressed_key][f'{name}']['v'] = vt[:i].clone()
+            compressed_st[compressed_key][f'{name}'] = {}
+            compressed_st[compressed_key][f'{name}']['u'] = (u[:, :i]@torch.diag(s)[:i, :i]).clone()
+            compressed_st[compressed_key][f'{name}']['v'] = vt[:i].clone()
+        else:
+            compressed_st[compressed_key][f'{name}'] = st[name]
 
     name = delta_ckpt.replace('delta', 'compressed_delta')
     torch.save(compressed_st, f'{name}')

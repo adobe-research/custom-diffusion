@@ -362,12 +362,13 @@ def load_model(text_encoder, tokenizer, unet, save_path, compress, freeze_model=
             token_embeds[id_] = st['modifier_token'][modifier_tokens[i]]
 
     print(st.keys())
-    if compress:
-        assert freeze_model == 'crossattn_kv', 'Model compression is not supported when all attention params are fine-tuned'
     for name, params in unet.named_parameters():
         if freeze_model == 'crossattn':
             if 'attn2' in name:
-                params.data.copy_(st['unet'][f'{name}'])
+                if compress and ('to_k' in name or 'to_v' in name):
+                    params.data += st['unet'][name]['u']@st['unet'][name]['v']
+                else:
+                    params.data.copy_(st['unet'][f'{name}'])
         else:
             if 'attn2.to_k' in name or 'attn2.to_v' in name:
                 if compress:
