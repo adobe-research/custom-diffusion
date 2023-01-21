@@ -159,11 +159,11 @@ data:
     num_workers: 4
     wrap: false
     train:
-      target: src.data.finetune.MaskBase
+      target: src.finetune_data.MaskBase
       params:
         size: 512
     train2:
-      target: src.data.finetune.MaskBase
+      target: src.finetune_data.MaskBase
       params:
         size: 512
 

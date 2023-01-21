@@ -142,7 +142,7 @@ bash scripts/finetune_gen.sh "cat" data/cat gen_reg/samples_cat  cat finetune_ad
 
 ### Multi-Concept Fine-tuning
 
-**Joint Training**
+**Joint training**
 
 ```
 ## run training (30 GB on 2 GPUs)
@@ -176,11 +176,12 @@ pip install accelerate
 pip install modelcards
 pip install transformers>=4.25.1
 pip install deepspeed
+pip install diffusers
 accelerate config
 export MODEL_NAME="CompVis/stable-diffusion-v1-4"
 ```
 
-**Single-Concept Fine-tuning**
+**Single-Concept fine-tuning**
 
 ```
 ## launch training script (2 GPUs recommended, increase --max_train_steps to 500 if 1 GPU)
@@ -199,20 +200,20 @@ accelerate launch src/diffuser_training.py \
           --lr_warmup_steps=0 \
           --max_train_steps=250 \
           --num_class_images=200 \
-          --scale_lr \
+          --scale_lr --hflip  \
           --modifier_token "<new1>"
 
 ## sample 
 python src/sample_diffuser.py --delta_ckpt logs/cat/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt "<new1> cat playing with a ball"
 ```
 
-**Multi-Concept Fine-tuning**
+**Multi-Concept fine-tuning**
 
 Provide a [json](assets/concept_list.json) file with the info about each concept, similar to [this](https://github.com/ShivamShrirao/diffusers/blob/main/examples/dreambooth/train_dreambooth.py).
 ```
 ## launch training script (2 GPUs recommended, increase --max_train_steps to 1000 if 1 GPU)
 
-CUDA_VISIBLE_DEVICES=2,3 accelerate launch src/diffuser_training.py \
+accelerate launch src/diffuser_training.py \
           --pretrained_model_name_or_path=$MODEL_NAME  \
           --output_dir=./logs/cat_wooden_pot  \
           --concepts_list=./assets/concept_list.json \
@@ -230,8 +231,17 @@ CUDA_VISIBLE_DEVICES=2,3 accelerate launch src/diffuser_training.py \
 python src/sample_diffuser.py --delta_ckpt logs/cat_wooden_pot/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt "<new1> cat sitting inside a <new2> wooden pot and looking up"
 ```
 
+**Optimization based weights merging for Multi-Concept**
 
-The above code is modified from the following [DreamBooth]( https://github.com/huggingface/diffusers/blob/main/examples/dreambooth/train_dreambooth.py), [Textual Inversion](https://github.com/huggingface/diffusers/blob/main/examples/textual_inversion/textual_inversion.py) training scripts. For more details on how to setup accelarate please refer [here](https://github.com/huggingface/diffusers/blob/main/examples/dreambooth).
+Given two fine-tuned model weights `delta1.bin` and `delta2.bin` for any two categories, the weights can be merged to create a single model as shown below.  
+```
+python src/composenW_diffuser.py --paths <delta1.bin>+<delta2.bin> --categories  "wooden pot+cat"  --ckpt "CompVis/stable-diffusion-v1-4"
+
+## sample
+python src/sample_diffuser.py --delta_ckpt optimized_logs/<folder-name>/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt "<new1> cat sitting inside a <new2> wooden pot and looking up"
+```
+
+The diffuser training code is modified from the following [DreamBooth]( https://github.com/huggingface/diffusers/blob/main/examples/dreambooth/train_dreambooth.py), [Textual Inversion](https://github.com/huggingface/diffusers/blob/main/examples/textual_inversion/textual_inversion.py) training scripts. For more details on how to setup accelarate please refer [here](https://github.com/huggingface/diffusers/blob/main/examples/dreambooth).
 
 ### Fine-tuning on human faces
 
@@ -262,7 +272,36 @@ Sample generations with different level of compression. By default our code save
 </p>
 </div>
 
+### Checkpoint conversions for stable-diffusion-v1-4
 
+* From diffusers `delta.bin` to CompVis `delta_model.ckpt`. 
+```
+python src/convert.py --delta_ckpt <path-to-folder>/delta.bin --ckpt <path-to-model-v1-4.ckpt> --mode diffuser-to-compvis                  
+# sample
+python sample.py --delta_ckpt <path-to-folder>/delta_model.ckpt --ckpt <path-to-model-v1-4.ckpt> --prompt <text-prompt> --config configs/custom-diffusion/finetune_addtoken.yaml
+```
+
+* From diffusers `delta.bin` to [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui) checkpoint. 
+```
+python src/convert.py --delta_ckpt <path-to-folder>/delta.bin --ckpt <path-to-model-v1-4.ckpt> --mode diffuser-to-webui                  
+# launch UI in stable-diffusion-webui directory
+bash webui.sh --embeddings-dir <path-to-folder>/webui/embeddings  --ckpt <path-to-folder>/webui/model.ckpt
+```
+
+* From CompVis `delta_model.ckpt` to diffusers `delta.bin`. 
+```
+python src/convert.py --delta_ckpt <path-to-folder>/delta_model.ckpt --ckpt <path-to-model-v1-4.ckpt> --mode compvis-to-diffuser                  
+# sample
+python src/sample_diffuser.py --delta_ckpt <path-to-folder>/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt <text-prompt>
+```
+
+* From CompVis `delta_model.ckpt` [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui) checkpoint. 
+```
+python src/convert.py --delta_ckpt <path-to-folder>/delta_model.ckpt --ckpt <path-to-model-v1-4.ckpt> --mode compvis-to-webui                  
+# launch UI in stable-diffusion-webui directory
+bash webui.sh --embeddings-dir <path-to-folder>/webui/embeddings  --ckpt <path-to-folder>/webui/model.ckpt
+```
+Converted checkpoints are saved in the `<path-to-folder>` of the original checkpoints. 
 
 
 ## References

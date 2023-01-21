@@ -18,8 +18,7 @@ done
 
 python src/retrieve.py --target_name "${ARRAY[0]}" --outpath ${ARRAY[2]}
 
-if ${ARRAY[4]} == "finetune.yaml"
-then
+if [ "${ARRAY[4]}" == "finetune.yaml" ]; then
     python -u  train.py \
             --base configs/custom-diffusion/${ARRAY[4]}  \
             -t --gpus 0,1 \

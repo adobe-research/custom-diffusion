@@ -22,8 +22,10 @@ def sample(ckpt, delta_ckpt, from_file, prompt, compress, freeze_model):
         diffuser_training.load_model(pipe.text_encoder, pipe.tokenizer, pipe.unet, delta_ckpt, compress, freeze_model)
         outdir = os.path.dirname(delta_ckpt)
 
+    all_images = []
     if prompt is not None:
         images = pipe([prompt]*5, num_inference_steps=200, guidance_scale=6., eta=1.).images
+        all_images += images
         images = np.hstack([np.array(x) for x in images])
         plt.imshow(images)
         plt.axis("off")
@@ -36,10 +38,15 @@ def sample(ckpt, delta_ckpt, from_file, prompt, compress, freeze_model):
 
         for prompt in data:
             images = pipe(prompt, num_inference_steps=200, guidance_scale=6., eta=1.).images
+            all_images += images
             images = np.hstack([np.array(x) for x in images], 0)
             plt.imshow(images)
             plt.axis("off")
             plt.savefig(f'{outdir}/{prompt[0]}.png', bbox_inches='tight')
+
+    os.makedirs(f'{outdir}/samples', exist_ok=True)
+    for i, im in enumerate(all_images):
+        im.save(f'{outdir}/samples/{i}.jpg')
 
 
 def parse_args():

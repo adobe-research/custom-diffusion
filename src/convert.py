@@ -8,10 +8,22 @@ import torch
 from omegaconf import OmegaConf
 from diffusers import StableDiffusionPipeline
 from ldm.util import instantiate_from_config
-from src import diffuser_training 
+from src import diffuser_training
 
 
 def load_model_from_config(config, ckpt, verbose=False):
+    print(f"Loading model from {ckpt}")
+    pl_sd = torch.load(ckpt, map_location="cpu")
+    if "global_step" in pl_sd:
+        print(f"Global Step: {pl_sd['global_step']}")
+    sd = pl_sd["state_dict"]
+    model = instantiate_from_config(config.model)
+    model.cuda()
+    model.eval()
+    return model
+
+
+def load_model_from_config_addtoken(config, ckpt, verbose=False):
     print(f"Loading model from {ckpt}")
     pl_sd = torch.load(ckpt, map_location="cpu")
     if "global_step" in pl_sd:
@@ -35,13 +47,14 @@ def load_model_from_config(config, ckpt, verbose=False):
     return model
 
 
-def convert(ckpt, delta_ckpt, newtoken, sd_version, config, compvis_to_diffuser=True):
+def convert(ckpt, delta_ckpt, sd_version, config, mode):
     config = OmegaConf.load(config)
     model = load_model_from_config(config, f"{ckpt}")
+    # get the mapping of layer names between diffuser and CompVis checkpoints
     mapping_compvis_to_diffuser = {}
     mapping_compvis_to_diffuser_rev = {}
     for key in list(model.state_dict().keys()):
-        if 'attn2.to_k' in key or 'attn2.to_v' in key:
+        if 'attn2' in key:
             diffuser_key = key.replace('model.diffusion_model.', '')
             if 'input_blocks' in key:
                 i, j = [int(x) for x in key.split('.')[3:5]]
@@ -55,13 +68,40 @@ def convert(ckpt, delta_ckpt, newtoken, sd_version, config, compvis_to_diffuser=
             mapping_compvis_to_diffuser[key] = diffuser_key
             mapping_compvis_to_diffuser_rev[diffuser_key] = key
 
-    print(mapping_compvis_to_diffuser)
-    if compvis_to_diffuser:
+    # convert checkpoint to webui
+    if mode in ['diffuser-to-webui' or 'compvis-to-webui']:
+        outpath = f'{os.path.dirname(delta_ckpt)}/webui'
+        os.makedirs(outpath, exist_ok=True)
+        if mode == 'diffuser-to-webui':
+            st = torch.load(delta_ckpt)
+            compvis_st = {}
+            compvis_st['state_dict'] = {}
+            for key in list(st['unet'].keys()):
+                compvis_st['state_dict'][mapping_compvis_to_diffuser_rev[key]] = st['unet'][key]
+
+            model.load_state_dict(compvis_st['state_dict'], strict=False)
+            torch.save({'state_dict': model.state_dict()}, f'{outpath}/model.ckpt')
+
+            if 'modifier_token' in st:
+                os.makedirs(f'{outpath}/embeddings/', exist_ok=True)
+                for word, feat in st['modifier_token'].items():
+                    torch.save({word: feat}, f'{outpath}/embeddings/{word}.pt')
+        else:
+            st = torch.load(delta_ckpt)["state_dict"]
+            model.load_state_dict(compvis_st['state_dict'], strict=False)
+            torch.save({'state_dict': model.state_dict()}, f'{outpath}/model.ckpt')
+
+            if 'embed' in st:
+                os.makedirs(f'{outpath}/embeddings/', exist_ok=True)
+                for i, feat in enumerate(st['embed']):
+                    torch.save({f'<new{i}>': feat}, f'{outpath}/embeddings/<new{i}>.pt')
+    # convert checkpoint from CompVis to diffuser
+    elif mode == 'compvis-to-diffuser':
         st = torch.load(delta_ckpt)["state_dict"]
         diffuser_st = {'unet': {}}
-        if newtoken > 0:
+        if 'embed' in st:
             diffuser_st['modifier_token'] = {}
-            for i in range(newtoken):
+            for i in range(st['embed'].size(0)):
                 diffuser_st['modifier_token'][f'<new{i+1}>'] = st['embed'][i].clone()
             del st['embed']
         for key in list(st.keys()):
@@ -71,7 +111,8 @@ def convert(ckpt, delta_ckpt, newtoken, sd_version, config, compvis_to_diffuser=
         pipe = StableDiffusionPipeline.from_pretrained(sd_version, torch_dtype=torch.float16).to("cuda")
         diffuser_training.load_model(pipe.text_encoder, pipe.tokenizer, pipe.unet, f'{os.path.dirname(delta_ckpt)}/delta.bin')
         pipe.save_pretrained(os.path.dirname(delta_ckpt))
-    else:
+    # convert checkpoint from diffuser to CompVis
+    elif mode == 'diffuser-to-compvis':
         st = torch.load(delta_ckpt)
         compvis_st = {}
         compvis_st['state_dict'] = {}
@@ -82,15 +123,15 @@ def convert(ckpt, delta_ckpt, newtoken, sd_version, config, compvis_to_diffuser=
             compvis_st['state_dict']['embed'] = torch.cat(compvis_st['state_dict']['embed'])
             config.model.params.cond_stage_config.target = 'src.custom_modules.FrozenCLIPEmbedderWrapper'
             config.model.params.cond_stage_config.params = {}
-            config.model.params.cond_stage_config.params.modifier_token = '+'.join([f'<new{i+1}>' for i in range(newtoken)])
+            config.model.params.cond_stage_config.params.modifier_token = '+'.join([f'<new{i+1}>' for i in range(len(st['modifier_token']))])
 
-        torch.save(compvis_st, f'{os.path.dirname(delta_ckpt)}/delta_model.ckpt')
         for key in list(st['unet'].keys()):
             compvis_st['state_dict'][mapping_compvis_to_diffuser_rev[key]] = st['unet'][key]
 
-        model = load_model_from_config(config, f"{ckpt}")
+        torch.save(compvis_st, f'{os.path.dirname(delta_ckpt)}/delta_model.ckpt')
+        model = load_model_from_config_addtoken(config, f"{ckpt}")
         if 'modifier_token' in st:
-            model.cond_stage_model.transformer.text_model.embeddings.token_embedding.weight.data[-newtoken:] = compvis_st['state_dict']['embed']
+            model.cond_stage_model.transformer.text_model.embeddings.token_embedding.weight.data[-len(st['modifier_token']):] = compvis_st['state_dict']['embed']
             del compvis_st['state_dict']['embed']
 
         model.load_state_dict(compvis_st['state_dict'], strict=False)
@@ -99,21 +140,20 @@ def convert(ckpt, delta_ckpt, newtoken, sd_version, config, compvis_to_diffuser=
 
 def parse_args():
     parser = argparse.ArgumentParser('Checkpoint conversion given delta ckpts, currently supported for stable diffusion 1.4 only', add_help=True)
-    parser.add_argument('--ckpt', help='pretrained compvis model checkpoint',
+    parser.add_argument('--ckpt', help='pretrained compvis model checkpoint', required=True,
                         type=str)
-    parser.add_argument('--delta_ckpt', help='delta checkpoint either of compvis or diffuser', default=None,
+    parser.add_argument('--delta_ckpt', help='delta checkpoint either of compvis or diffuser', required=True,
                         type=str)
-    parser.add_argument('--newtoken', help='number of new tokens in the checkpoint', default=1,
-                        type=int)
     parser.add_argument('--sd_version', default="CompVis/stable-diffusion-v1-4",
                         type=str)
     parser.add_argument('--config', default="configs/custom-diffusion/finetune.yaml",
                         type=str)
-    parser.add_argument("--compvis_to_diffuser", action='store_true')
+    parser.add_argument("--mode", default='compvis-to-diffuser', choices=['diffuser-to-webui', 'compvis-to-webui', 'compvis-to-diffuser', 'diffuser-to-compvis'],
+                        type=str)
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     args = parse_args()
     assert args.sd_version == "CompVis/stable-diffusion-v1-4"
-    convert(args.ckpt, args.delta_ckpt, args.newtoken, args.sd_version, args.config, args.compvis_to_diffuser)
+    convert(args.ckpt, args.delta_ckpt, args.sd_version, args.config, args.mode)

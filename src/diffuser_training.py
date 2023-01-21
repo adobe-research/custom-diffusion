@@ -343,7 +343,7 @@ def save_progress(text_encoder, unet, modifier_token_id, accelerator, args, save
     torch.save(delta_dict, save_path)
 
 
-def load_model(text_encoder, tokenizer, unet, save_path, compress, freeze_model='crossattn_kv'):
+def load_model(text_encoder, tokenizer, unet, save_path, compress=False, freeze_model='crossattn_kv'):
     st = torch.load(save_path)
     if 'text_encoder' in st:
         text_encoder.load_state_dict(st['text_encoder'])
@@ -1233,7 +1233,7 @@ def main(args):
 
         accelerator.wait_for_everyone()
 
-    # Create the pipeline using using the trained modules and save it.
+    # Create the pipeline using the trained modules and save it.
     if accelerator.is_main_process:
         pipeline = DiffusionPipeline.from_pretrained(
             args.pretrained_model_name_or_path,
@@ -1254,3 +1254,4 @@ def main(args):
 if __name__ == "__main__":
     args = parse_args()
     main(args)
+

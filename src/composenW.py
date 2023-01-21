@@ -265,7 +265,6 @@ def compose(paths, category, outpath, pretrained_model_path, regularization_prom
     torch.save({'state_dict': new_weights}, f'{save_path}/{outpath}/checkpoints/delta_epoch=000000.ckpt')
 
 
-
 def parse_args():
     parser = argparse.ArgumentParser('', add_help=False)
     parser.add_argument('--paths', help='+ separated list of checkpoints', required=True,
