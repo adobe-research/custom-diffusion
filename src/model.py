@@ -105,7 +105,7 @@ import numpy as np
 
 class CustomDiffusion(LatentDiffusion):
     def __init__(self,
-                 freeze_model=0,
+                 freeze_model='crossattn-kv',
                  cond_stage_trainable=False,
                  add_token=False,
                  *args, **kwargs):
@@ -178,10 +178,16 @@ class CustomDiffusion(LatentDiffusion):
     def configure_optimizers(self):
         lr = self.learning_rate
         params = []
-        if self.freeze_model == 1:
+        if self.freeze_model == 'crossattn-kv':
             for x in self.model.diffusion_model.named_parameters():
                 if 'transformer_blocks' in x[0]:
-                    if 'attn2.to_k' in x[0] or 'attn2.to_v' in x[0]: 
+                    if 'attn2.to_k' in x[0] or 'attn2.to_v' in x[0]:
+                        params += [x[1]]
+                        print(x[0])
+        elif self.freeze_model == 'crossattn':
+            for x in self.model.diffusion_model.named_parameters():
+                if 'transformer_blocks' in x[0]:
+                    if 'attn2' in x[0]:
                         params += [x[1]]
                         print(x[0])
         else:
