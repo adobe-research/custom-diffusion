@@ -18,6 +18,7 @@ def load_model_from_config(config, ckpt, verbose=False):
         print(f"Global Step: {pl_sd['global_step']}")
     sd = pl_sd["state_dict"]
     model = instantiate_from_config(config.model)
+    m, u = model.load_state_dict(sd, strict=False)
     model.cuda()
     model.eval()
     return model
@@ -47,7 +48,7 @@ def load_model_from_config_addtoken(config, ckpt, verbose=False):
     return model
 
 
-def convert(ckpt, delta_ckpt, sd_version, config, mode):
+def convert(ckpt, delta_ckpt, sd_version, config, modelname, mode):
     config = OmegaConf.load(config)
     model = load_model_from_config(config, f"{ckpt}")
     # get the mapping of layer names between diffuser and CompVis checkpoints
@@ -80,7 +81,7 @@ def convert(ckpt, delta_ckpt, sd_version, config, mode):
                 compvis_st['state_dict'][mapping_compvis_to_diffuser_rev[key]] = st['unet'][key]
 
             model.load_state_dict(compvis_st['state_dict'], strict=False)
-            torch.save({'state_dict': model.state_dict()}, f'{outpath}/model.ckpt')
+            torch.save({'state_dict': model.state_dict()}, f'{outpath}/{modelname}')
 
             if 'modifier_token' in st:
                 os.makedirs(f'{outpath}/embeddings/', exist_ok=True)
@@ -89,7 +90,7 @@ def convert(ckpt, delta_ckpt, sd_version, config, mode):
         else:
             st = torch.load(delta_ckpt)["state_dict"]
             model.load_state_dict(compvis_st['state_dict'], strict=False)
-            torch.save({'state_dict': model.state_dict()}, f'{outpath}/model.ckpt')
+            torch.save({'state_dict': model.state_dict()}, f'{outpath}/{modelname}')
 
             if 'embed' in st:
                 os.makedirs(f'{outpath}/embeddings/', exist_ok=True)
@@ -148,6 +149,8 @@ def parse_args():
                         type=str)
     parser.add_argument('--config', default="configs/custom-diffusion/finetune.yaml",
                         type=str)
+    parser.add_argument('--modelname', default="model.ckpt",
+                        type=str)
     parser.add_argument("--mode", default='compvis-to-diffuser', choices=['diffuser-to-webui', 'compvis-to-webui', 'compvis-to-diffuser', 'diffuser-to-compvis'],
                         type=str)
     return parser.parse_args()
@@ -156,4 +159,4 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
     assert args.sd_version == "CompVis/stable-diffusion-v1-4"
-    convert(args.ckpt, args.delta_ckpt, args.sd_version, args.config, args.mode)
+    convert(args.ckpt, args.delta_ckpt, args.sd_version, args.config, args.modelname, args.mode)
