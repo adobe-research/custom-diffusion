@@ -10,9 +10,9 @@ sys.path.append('./')
 import torch
 from diffusers import StableDiffusionPipeline
 from src import diffuser_training 
+from PIL import Image
 
-
-def sample(ckpt, delta_ckpt, from_file, prompt, compress, freeze_model):
+def sample(ckpt, delta_ckpt, from_file, prompt, compress, batch_size, freeze_model):
     model_id = ckpt
     pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
 
@@ -24,25 +24,27 @@ def sample(ckpt, delta_ckpt, from_file, prompt, compress, freeze_model):
 
     all_images = []
     if prompt is not None:
-        images = pipe([prompt]*5, num_inference_steps=200, guidance_scale=6., eta=1.).images
+        images = pipe([prompt]*batch_size, num_inference_steps=200, guidance_scale=6., eta=1.).images
         all_images += images
         images = np.hstack([np.array(x) for x in images])
-        plt.imshow(images)
-        plt.axis("off")
-        plt.savefig(f'{outdir}/{prompt}.png', bbox_inches='tight')
+        images = Image.fromarray(images)
+        # takes only first 50 characters of prompt to name the image file
+        name = '-'.join(prompt[:50].split())
+        images.save(f'{outdir}/{name}.png')
     else:
         print(f"reading prompts from {from_file}")
         with open(from_file, "r") as f:
             data = f.read().splitlines()
-            data = [5 * [prompt] for prompt in data]
+            data = [[prompt]*batch_size for prompt in data]
 
         for prompt in data:
             images = pipe(prompt, num_inference_steps=200, guidance_scale=6., eta=1.).images
             all_images += images
             images = np.hstack([np.array(x) for x in images], 0)
-            plt.imshow(images)
-            plt.axis("off")
-            plt.savefig(f'{outdir}/{prompt[0]}.png', bbox_inches='tight')
+            images = Image.fromarray(images)
+            # takes only first 50 characters of prompt to name the image file
+            name = '-'.join(prompt[0][:50].split())
+            images.save(f'{outdir}/{name}.png')
 
     os.makedirs(f'{outdir}/samples', exist_ok=True)
     for i, im in enumerate(all_images):
@@ -60,6 +62,7 @@ def parse_args():
     parser.add_argument('--prompt', help='prompt to generate', default=None,
                         type=str)
     parser.add_argument("--compress", action='store_true')
+    parser.add_argument("--batch_size", default=5, type=int)
     parser.add_argument('--freeze_model', help='crossattn or crossattn_kv', default='crossattn_kv',
                         type=str)
     return parser.parse_args()
@@ -67,4 +70,4 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    sample(args.ckpt, args.delta_ckpt, args.from_file, args.prompt, args.compress, args.freeze_model)
+    sample(args.ckpt, args.delta_ckpt, args.from_file, args.prompt, args.compress, args.batch_size, args.freeze_model)
