@@ -1001,14 +1001,22 @@ def main(args):
         )
         freeze_params(params_to_freeze)
 
-        params_to_optimize = itertools.chain( text_encoder.get_input_embeddings().parameters() , [x[1] for x in unet.named_parameters() if ('attn2.to_k' in x[0] or 'attn2.to_v' in x[0])] )
+        if args.freeze_model == 'crossattn':
+            params_to_optimize = itertools.chain( text_encoder.get_input_embeddings().parameters() , [x[1] for x in unet.named_parameters() if 'attn2' in x[0]] )
+        else:
+            params_to_optimize = itertools.chain( text_encoder.get_input_embeddings().parameters() , [x[1] for x in unet.named_parameters() if ('attn2.to_k' in x[0] or 'attn2.to_v' in x[0])] )
 
     ########################################################
     ########################################################
     else:
-        params_to_optimize = (
-            itertools.chain([x[1] for x in unet.named_parameters() if ('attn2.to_k' in x[0] or 'attn2.to_v' in x[0])], text_encoder.parameters() if args.train_text_encoder else [] ) 
-        )
+        if args.freeze_model == 'crossattn':
+            params_to_optimize = (
+                itertools.chain([x[1] for x in unet.named_parameters() if 'attn2' in x[0]], text_encoder.parameters() if args.train_text_encoder else [] ) 
+            )
+        else:
+            params_to_optimize = (
+                itertools.chain([x[1] for x in unet.named_parameters() if ('attn2.to_k' in x[0] or 'attn2.to_v' in x[0])], text_encoder.parameters() if args.train_text_encoder else [] ) 
+            )
 
     optimizer = optimizer_class(
         params_to_optimize,

@@ -176,7 +176,7 @@ pip install accelerate
 pip install modelcards
 pip install transformers>=4.25.1
 pip install deepspeed
-pip install diffusers
+pip install diffusers <= 0.11.0
 accelerate config
 export MODEL_NAME="CompVis/stable-diffusion-v1-4"
 ```
