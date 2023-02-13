@@ -159,9 +159,9 @@ def compose(paths, category, outpath, pretrained_model_path, regularization_prom
 
     if prompts is not None:
         if os.path.exists(prompts):
-            sample_diffuser.sample(model_id, f'{save_path}/{outpath}/delta.bin', prompts, prompt=None, compress=False, freeze_model='crossattn_kv')
+            sample_diffuser.sample(model_id, f'{save_path}/{outpath}/delta.bin', prompts, prompt=None, compress=False, freeze_model='crossattn_kv', batch_size=1)
         else:
-            sample_diffuser.sample(model_id, f'{save_path}/{outpath}/delta.bin', from_file=None, prompt=prompts, compress=False, freeze_model='crossattn_kv')
+            sample_diffuser.sample(model_id, f'{save_path}/{outpath}/delta.bin', from_file=None, prompt=prompts, compress=False, freeze_model='crossattn_kv', batch_size=1)
 
 
 def parse_args():
