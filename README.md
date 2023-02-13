@@ -96,7 +96,7 @@ Our method also uses a small set of regularization images (200) to prevent overf
 ## Getting Started
 
 ```
-git clone git@github.com:adobe-research/custom-diffusion.git
+git clone https://github.com/adobe-research/custom-diffusion.git
 cd custom-diffusion
 git clone https://github.com/CompVis/stable-diffusion.git
 cd stable-diffusion
