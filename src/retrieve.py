@@ -12,8 +12,8 @@ from clip_retrieval.clip_client import ClipClient
 
 def retrieve(target_name, outpath, num_class_images):
     num_images = 2*num_class_images
-    client = ClipClient(url="https://knn5.laion.ai/knn-service", indice_name="laion5B", num_images=num_images,  aesthetic_weight=0.1)
-
+    client = ClipClient(url="https://knn.laion.ai/knn-service", indice_name="laion_400m", num_images=num_images,  aesthetic_weight=0.1)
+    
     if len(target_name.split()):
         target = '_'.join(target_name.split())
     else:
@@ -26,11 +26,10 @@ def retrieve(target_name, outpath, num_class_images):
     while True:
         results = client.query(text=target_name)
         if len(results) >= num_class_images or num_images > 1e4:
-            num_images = 2*num_class_images
             break
         else:
-            num_images = 1.5*num_images
-    print(len(results), target_name)
+            num_images = int(1.5*num_images)
+            client = ClipClient(url="https://knn.laion.ai/knn-service", indice_name="laion_400m", num_images=num_images,  aesthetic_weight=0.1)
 
     count = 0
     urls = []
