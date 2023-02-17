@@ -1202,7 +1202,7 @@ def main(args):
                     # Get the index for tokens that we want to zero the grads for
                     index_grads_to_zero = torch.arange(len(tokenizer)) != modifier_token_id[0]
                     for i in range(len(modifier_token_id[1:])):
-                        index_grads_to_zero = index_grads_to_zero | torch.arange(len(tokenizer)) != modifier_token_id[i]
+                        index_grads_to_zero = index_grads_to_zero & (torch.arange(len(tokenizer)) != modifier_token_id[i])
                     grads_text_encoder.data[index_grads_to_zero, :] = grads_text_encoder.data[index_grads_to_zero, :].fill_(0)
 
                 if accelerator.sync_gradients:
