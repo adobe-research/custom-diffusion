@@ -88,7 +88,7 @@ def convert(ckpt, delta_ckpt, sd_version, config, modelname, mode):
                 for word, feat in st['modifier_token'].items():
                     torch.save({word: feat}, f'{outpath}/embeddings/{word}.pt')
         else:
-            st = torch.load(delta_ckpt)["state_dict"]
+            compvis_st = torch.load(delta_ckpt)["state_dict"]
             model.load_state_dict(compvis_st['state_dict'], strict=False)
             torch.save({'state_dict': model.state_dict()}, f'{outpath}/{modelname}')
 
