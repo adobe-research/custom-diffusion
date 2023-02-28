@@ -16,7 +16,7 @@ Our method further allows you to use a combination of multiple concepts such as 
 
 ***Multi-Concept Customization of Text-to-Image Diffusion*** <br>
 [Nupur Kumari](https://nupurkmr9.github.io/), [Bingliang Zhang](https://zhangbingliang2019.github.io), [Richard Zhang](https://richzhang.github.io/), [Eli Shechtman](https://research.adobe.com/person/eli-shechtman/), [Jun-Yan Zhu](https://www.cs.cmu.edu/~junyanz/)<br>
-arXiv preprint arXiv:2212.04488 <br>
+In CVPR 2023 <br>
 
 
 
@@ -310,8 +310,8 @@ Converted checkpoints are saved in the `<path-to-folder>` of the original checkp
 @article{kumari2022customdiffusion,
   title={Multi-Concept Customization of Text-to-Image Diffusion},
   author={Kumari, Nupur and Zhang, Bingliang and Zhang, Richard and Shechtman, Eli and Zhu, Jun-Yan},
-  journal = {arXiv},
-  year = {2022}
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2023}
 }
 ```
 
