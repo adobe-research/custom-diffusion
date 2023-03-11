@@ -280,6 +280,12 @@ def main():
         action='store_true',
         help="delta path provided is a compressed checkpoint.",
     )
+    parser.add_argument(
+        "--modifier_token",
+        type=str,
+        default=None,
+        help="A token to use as a modifier for the concept.",
+    )
     opt = parser.parse_args()
 
     if opt.wandb_log:
@@ -300,6 +306,10 @@ def main():
 
     seed_everything(opt.seed)
     config = OmegaConf.load(f"{opt.config}")
+    if opt.modifier_token is not None:
+        config.model.params.cond_stage_config.target = 'src.custom_modules.FrozenCLIPEmbedderWrapper'
+        config.model.params.cond_stage_config.params = {}
+        config.model.params.cond_stage_config.params.modifier_token = opt.modifier_token
     model = load_model_from_config(config, f"{opt.ckpt}")
 
     if opt.delta_ckpt is not None:
