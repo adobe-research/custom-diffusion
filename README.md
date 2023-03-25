@@ -102,7 +102,7 @@ git clone https://github.com/CompVis/stable-diffusion.git
 cd stable-diffusion
 conda env create -f environment.yaml
 conda activate ldm
-pip install clip-retrieval
+pip install clip-retrieval tqdm
 ```
 
 Our code was developed on the following commit `#21f890f9da3cfbeaba8e2ac3c425ee9e998d5229` of [stable-diffusion](https://github.com/CompVis/stable-diffusion).

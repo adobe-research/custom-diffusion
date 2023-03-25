@@ -3,6 +3,7 @@
 
 import argparse
 import os
+import tqdm
 from pathlib import Path
 import requests
 from PIL import Image
@@ -13,7 +14,7 @@ from clip_retrieval.clip_client import ClipClient
 def retrieve(target_name, outpath, num_class_images):
     num_images = 2*num_class_images
     client = ClipClient(url="https://knn.laion.ai/knn-service", indice_name="laion_400m", num_images=num_images,  aesthetic_weight=0.1)
-    
+
     if len(target_name.split()):
         target = '_'.join(target_name.split())
     else:
@@ -35,6 +36,8 @@ def retrieve(target_name, outpath, num_class_images):
     urls = []
     captions = []
 
+    pbar = tqdm.tqdm(desc='downloading real regularization images', total=num_class_images)
+
     for each in results:
         name = f'{outpath}/{target}/{count}.jpg'
         success = True
@@ -44,11 +47,9 @@ def retrieve(target_name, outpath, num_class_images):
                 success = True
                 break
             except:
-                print("Connection refused by the server..")
                 success = False
                 break
         if success and img.status_code == 200:
-            print(len(img.content), count)
             try:
                 _ = Image.open(BytesIO(img.content))
                 with open(name, 'wb') as f:
@@ -56,8 +57,9 @@ def retrieve(target_name, outpath, num_class_images):
                 urls.append(each['url'])
                 captions.append(each['caption'])
                 count += 1
+                pbar.update(1)
             except:
-                print("not an image")
+                pass
         if count > num_class_images:
             break
 
