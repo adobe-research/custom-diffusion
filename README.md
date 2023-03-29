@@ -237,7 +237,7 @@ python src/diffusers_sample.py --delta_ckpt logs/cat_wooden_pot/delta.bin --ckpt
 
 Given two fine-tuned model weights `delta1.bin` and `delta2.bin` for any two categories, the weights can be merged to create a single model as shown below.  
 ```
-python src/composenW_diffuser.py --paths <delta1.bin>+<delta2.bin> --categories  "wooden pot+cat"  --ckpt "CompVis/stable-diffusion-v1-4"
+python src/diffusers_composenW.py --paths <delta1.bin>+<delta2.bin> --categories  "wooden pot+cat"  --ckpt "CompVis/stable-diffusion-v1-4"
 
 ## sample
 python src/diffusers_sample.py --delta_ckpt optimized_logs/<folder-name>/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt "<new1> cat sitting inside a <new2> wooden pot and looking up"
@@ -294,7 +294,7 @@ bash webui.sh --embeddings-dir <path-to-folder>/webui/embeddings  --ckpt <path-t
 ```
 python src/convert.py --delta_ckpt <path-to-folder>/delta_model.ckpt --ckpt <path-to-model-v1-4.ckpt> --mode compvis-to-diffuser                  
 # sample
-python src/sample_diffuser.py --delta_ckpt <path-to-folder>/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt <text-prompt>
+python src/diffusers_sample.py --delta_ckpt <path-to-folder>/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt <text-prompt>
 ```
 
 * From CompVis `delta_model.ckpt` [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui) checkpoint. 
