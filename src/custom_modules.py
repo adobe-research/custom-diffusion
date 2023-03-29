@@ -295,14 +295,11 @@ class FrozenCLIPEmbedderWrapper(AbstractEncoder):
                                         return_overflowing_tokens=False, padding="max_length", return_tensors="pt")
         tokens = batch_encoding["input_ids"].to(self.device)
 
-        if len(self.modifier_token) == 3:
-            indices = ((tokens == self.modifier_token_id[-1]) | (tokens == self.modifier_token_id[-2]) | (tokens == self.modifier_token_id[-3]))*1
-        elif len(self.modifier_token) == 2:
-            indices = ((tokens == self.modifier_token_id[-1]) | (tokens == self.modifier_token_id[-2]))*1
-        else:
-            indices = (tokens == self.modifier_token_id[-1])*1
+        indices = tokens == self.modifier_token_id[-1]
+        for token_id in self.modifier_token_id:
+            indices |= tokens == token_id
 
-        indices = indices.unsqueeze(-1)
+        indices = (indices*1).unsqueeze(-1)
 
         input_shape = tokens.size()
         tokens = tokens.view(-1, input_shape[-1])
