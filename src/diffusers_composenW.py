@@ -10,7 +10,7 @@ from scipy.linalg import lu_factor, lu_solve
 
 sys.path.append('./')
 from diffusers import StableDiffusionPipeline
-from src import sample_diffuser
+from src import diffusers_sample
 
 
 def gdupdateWexact(K, V, Ktarget1, Vtarget1, W, device='cuda'):
@@ -96,7 +96,7 @@ def compose(paths, category, outpath, pretrained_model_path, regularization_prom
     token_embeds = pipe.text_encoder.get_input_embeddings().weight.data
     for (x, y) in zip(modifier_token_ids, list(embeds.keys())):
         token_embeds[x] = embeds[y]
-        print(x,y, "added embeddings")
+        print(x, y, "added embeddings")
 
     f = open(regularization_prompt, 'r')
     prompt = [x.strip() for x in f.readlines()][:200]
@@ -159,9 +159,9 @@ def compose(paths, category, outpath, pretrained_model_path, regularization_prom
 
     if prompts is not None:
         if os.path.exists(prompts):
-            sample_diffuser.sample(model_id, f'{save_path}/{outpath}/delta.bin', prompts, prompt=None, compress=False, freeze_model='crossattn_kv', batch_size=1)
+            diffusers_sample.sample(model_id, f'{save_path}/{outpath}/delta.bin', prompts, prompt=None, compress=False, freeze_model='crossattn_kv', batch_size=1)
         else:
-            sample_diffuser.sample(model_id, f'{save_path}/{outpath}/delta.bin', from_file=None, prompt=prompts, compress=False, freeze_model='crossattn_kv', batch_size=1)
+            diffusers_sample.sample(model_id, f'{save_path}/{outpath}/delta.bin', from_file=None, prompt=prompts, compress=False, freeze_model='crossattn_kv', batch_size=1)
 
 
 def parse_args():

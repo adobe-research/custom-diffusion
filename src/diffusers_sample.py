@@ -5,26 +5,24 @@ import argparse
 import sys
 import os
 import numpy as np
-import matplotlib.pyplot as plt
-sys.path.append('./')
 import torch
-from diffusers import StableDiffusionPipeline
-from src import diffuser_training 
 from PIL import Image
+
+sys.path.append('./')
+from src.diffusers_model_pipeline import CustomDiffusionPipeline
+
 
 def sample(ckpt, delta_ckpt, from_file, prompt, compress, batch_size, freeze_model):
     model_id = ckpt
-    pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
+    pipe = CustomDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
+    pipe.load_model(delta_ckpt, compress)
 
-    outdir = 'outputs/txt2img-samples'
-    os.makedirs(outdir, exist_ok=True)
-    if delta_ckpt is not None:
-        diffuser_training.load_model(pipe.text_encoder, pipe.tokenizer, pipe.unet, delta_ckpt, compress, freeze_model)
-        outdir = os.path.dirname(delta_ckpt)
+    outdir = os.path.dirname(delta_ckpt)
+    generator = torch.Generator(device='cuda').manual_seed(42)
 
     all_images = []
     if prompt is not None:
-        images = pipe([prompt]*batch_size, num_inference_steps=200, guidance_scale=6., eta=1.).images
+        images = pipe([prompt]*batch_size, num_inference_steps=200, guidance_scale=6., eta=1., generator=generator).images
         all_images += images
         images = np.hstack([np.array(x) for x in images])
         images = Image.fromarray(images)
@@ -38,7 +36,7 @@ def sample(ckpt, delta_ckpt, from_file, prompt, compress, batch_size, freeze_mod
             data = [[prompt]*batch_size for prompt in data]
 
         for prompt in data:
-            images = pipe(prompt, num_inference_steps=200, guidance_scale=6., eta=1.).images
+            images = pipe(prompt, num_inference_steps=200, guidance_scale=6., eta=1., generator=generator).images
             all_images += images
             images = np.hstack([np.array(x) for x in images], 0)
             images = Image.fromarray(images)
