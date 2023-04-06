@@ -6,9 +6,7 @@
 #                         http://www.apache.org/licenses/
 # ==========================================================================================
 #
-# Adobe’s modifications are Copyright 2022 Adobe Research. All rights reserved.
-# Adobe’s modifications are licensed under the Adobe Research License. To view a copy of the license, visit
-# LICENSE.md.
+# modifications are MIT License. To view a copy of the license, visit MIT_LICENSE.md.
 #
 # ==========================================================================================
 #                               Apache License
@@ -299,10 +297,10 @@ class CustomDiffusionAttnProcessor:
         key = attn.to_k(encoder_hidden_states)
         value = attn.to_v(encoder_hidden_states)
         if crossattn:
-            modifier = torch.ones_like(key)
-            modifier[:, :1, :] = modifier[:, :1, :]*0.
-            key = modifier*key + (1-modifier)*key.detach()
-            value = modifier*value + (1-modifier)*value.detach()
+            detach = torch.ones_like(key)
+            detach[:, :1, :] = detach[:, :1, :]*0.
+            key = detach*key + (1-detach)*key.detach()
+            value = detach*value + (1-detach)*value.detach()
 
         query = attn.head_to_batch_dim(query)
         key = attn.head_to_batch_dim(key)
@@ -342,10 +340,10 @@ class CustomDiffusionXFormersAttnProcessor:
         key = attn.to_k(encoder_hidden_states)
         value = attn.to_v(encoder_hidden_states)
         if crossattn:
-            modifier = torch.ones_like(key)
-            modifier[:, :1, :] = modifier[:, :1, :]*0.
-            key = modifier*key + (1-modifier)*key.detach()
-            value = modifier*value + (1-modifier)*value.detach()
+            detach = torch.ones_like(key)
+            detach[:, :1, :] = detach[:, :1, :]*0.
+            key = detach*key + (1-detach)*key.detach()
+            value = detach*value + (1-detach)*value.detach()
 
         query = attn.head_to_batch_dim(query).contiguous()
         key = attn.head_to_batch_dim(key).contiguous()

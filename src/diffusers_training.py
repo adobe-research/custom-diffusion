@@ -6,9 +6,7 @@
 #                         http://www.apache.org/licenses/
 # ==========================================================================================
 #
-# Adobe’s modifications are Copyright 2022 Adobe Research. All rights reserved.
-# Adobe’s modifications are licensed under the Adobe Research License. To view a copy of the license, visit
-# LICENSE.md.
+# modifications are MIT License. To view a copy of the license, visit MIT_LICENSE.md.
 #
 # ==========================================================================================
 #                               Apache License
