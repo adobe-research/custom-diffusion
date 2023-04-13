@@ -107,7 +107,9 @@ pip install clip-retrieval tqdm
 
 Our code was developed on the following commit `#21f890f9da3cfbeaba8e2ac3c425ee9e998d5229` of [stable-diffusion](https://github.com/CompVis/stable-diffusion).
 
-For downloading the stable-diffusion model checkpoint, please refer [here](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original).
+Download the stable-diffusion model checkpoint
+`wget https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt`
+For more details, please refer [here](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original).
 
 **Dataset:** we release some of the datasets used in paper [here](https://www.cs.cmu.edu/~custom-diffusion/assets/data.zip). 
 Images taken from UnSplash are under [UnSplash LICENSE](https://unsplash.com/license). Moongate dataset can be downloaded from [here](https://github.com/odegeasslbc/FastGAN-pytorch).
@@ -132,7 +134,7 @@ python src/get_deltas.py --path logs/<folder-name> --newtoken 1
 python sample.py --prompt "<new1> cat playing with a ball" --delta_ckpt logs/<folder-name>/checkpoints/delta_epoch\=000004.ckpt --ckpt <pretrained-model-path>
 ```
 
-Our results in the paper are not based on the [clip-retrieval](https://github.com/rom1504/clip-retrieval) for retrieving real images as the regularization samples. But this also leads to similar results.
+The `<pretrained-model-path>` is the path to the pretrained `sd-v1-4.ckpt` model. Our results in the paper are not based on the [clip-retrieval](https://github.com/rom1504/clip-retrieval) for retrieving real images as the regularization samples. But this also leads to similar results.
 
 **Generated images as regularization**
 ```

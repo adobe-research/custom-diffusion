@@ -415,16 +415,6 @@ class CustomDiffusionPipeline(StableDiffusionPipeline):
                          requires_safety_checker)
 
         # change attn class
-        def change_attn(unet):
-            for layer in unet.children():
-                if type(layer) == CrossAttention:
-                    bound_method = set_use_memory_efficient_attention_xformers.__get__(layer, layer.__class__)
-                    setattr(layer, 'set_use_memory_efficient_attention_xformers', bound_method)
-                else:
-                    change_attn(layer)
-
-        change_attn(self.unet)
-        self.unet.set_attn_processor(CustomDiffusionAttnProcessor())
         self.modifier_token = modifier_token
         self.modifier_token_id = modifier_token_id
 

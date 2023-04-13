@@ -645,8 +645,7 @@ def main(args):
                 class_images_dir.mkdir(parents=True, exist_ok=True)
             if args.real_prior:
                 if accelerator.is_main_process:
-                    name = '_'.join(concept['class_prompt'].split())
-                    if not Path(os.path.join(class_images_dir, name)).exists() or len(list(Path(os.path.join(class_images_dir, name)).iterdir())) < args.num_class_images:
+                    if not Path(os.path.join(class_images_dir, 'images')).exists() or len(list(Path(os.path.join(class_images_dir, 'images')).iterdir())) < args.num_class_images:
                         retrieve.retrieve(concept['class_prompt'], class_images_dir, args.num_class_images)
                 concept['class_prompt'] = os.path.join(class_images_dir, 'caption.txt')
                 concept['class_data_dir'] = os.path.join(class_images_dir, 'images.txt')
@@ -674,7 +673,7 @@ def main(args):
                     num_new_images = args.num_class_images - cur_class_images
                     logger.info(f"Number of class images to sample: {num_new_images}.")
 
-                    sample_dataset = PromptDataset(args.class_prompt, num_new_images)
+                    sample_dataset = PromptDataset(concept['class_prompt'], num_new_images)
                     sample_dataloader = torch.utils.data.DataLoader(sample_dataset, batch_size=args.sample_batch_size)
 
                     sample_dataloader = accelerator.prepare(sample_dataloader)
@@ -741,7 +740,6 @@ def main(args):
         args.pretrained_model_name_or_path, subfolder="unet", revision=args.revision
     )
 
-    # We only train the additional adapter LoRA layers
     vae.requires_grad_(False)
     if not args.train_text_encoder and args.modifier_token is None:
         text_encoder.requires_grad_(False)
@@ -1032,12 +1030,13 @@ def main(args):
                             args.pretrained_model_name_or_path,
                             unet=accelerator.unwrap_model(unet),
                             text_encoder=accelerator.unwrap_model(text_encoder),
+                            tokenizer=tokenizer,
                             revision=args.revision,
                             modifier_token=args.modifier_token,
                             modifier_token_id=modifier_token_id,
                         )
                         save_path = os.path.join(args.output_dir, f"delta-{global_step}.bin")
-                        pipeline.save_pretrained(save_path)
+                        pipeline.save_pretrained(save_path, freeze_model=args.freeze_model)
 
             logs = {"loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0]}
             progress_bar.set_postfix(**logs)
@@ -1061,7 +1060,7 @@ def main(args):
             modifier_token_id=modifier_token_id,
         )
         save_path = os.path.join(args.output_dir, f"delta.bin")
-        pipeline.save_pretrained(save_path)
+        pipeline.save_pretrained(save_path, freeze_model=args.freeze_model)
         if args.validation_prompt is not None:
             logger.info(
                 f"Running validation... \n Generating {args.num_validation_images} images with prompt:"
