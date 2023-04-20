@@ -3,6 +3,9 @@
 ### [website](https://www.cs.cmu.edu/~custom-diffusion/)  | [paper](http://arxiv.org/abs/2212.04488) | [gradio demo](https://huggingface.co/spaces/nupurkmr9/custom-diffusion)
 
 
+**[NEW!]** Custom Diffusion is now supported in diffusers. Please [refer](https://github.com/huggingface/diffusers/tree/main/examples/custom_diffusion) here for training and inference details. 
+
+
 <br>
 <div class="gif">
 <p align="center">
@@ -171,6 +174,9 @@ python sample.py --prompt "the <new2> cat sculpture in the style of a <new1> woo
 
 
 ### Training using Diffusers library
+
+**[NEW!]** Custom Diffusion is also supported in diffusers now. Please [refer](https://github.com/huggingface/diffusers/tree/main/examples/custom_diffusion) here for training and inference details. 
+
 
 ```
 ## install requirements 
