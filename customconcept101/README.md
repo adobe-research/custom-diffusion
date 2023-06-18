@@ -1,6 +1,6 @@
 # CustomConcept101
 
-We release a dataset of 101 concepts with 3-15 images for each concept for evaluating model customization methods. 
+We release a dataset of 101 concepts with 3-15 images for each concept for evaluating model customization methods. For a more detailed view target images please refer to our [webpage](https://www.cs.cmu.edu/~custom-diffusion/dataset.html). 
 
 <br>
 <div>
@@ -34,7 +34,7 @@ python evaluate.py --sample_root {folder} --target_path {target-folder} --numgen
 * `outpkl`: the location to save evaluation results (default: evaluation.pkl)
 
 ## Results
-We compare our method (Custom Diffusion) with [DreamBooth](https://dreambooth.github.io) and [Textual Inversion](https://textual-inversion.github.io) on this dataset. We trained DreamBooth and Textual Inversion according to the suggested hyperparameters in the respective papers. Both Ours and DreamBooth are trained with generated images as regularization. 
+We compare our method (Custom Diffusion) with [DreamBooth](https://dreambooth.github.io) and [Textual Inversion](https://textual-inversion.github.io) on this dataset. We trained DreamBooth and Textual Inversion according to the suggested hyperparameters in the respective papers. Both Ours and DreamBooth are trained with generated images as regularization.
 
 **Single concept**
 
