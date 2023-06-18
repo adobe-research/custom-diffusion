@@ -1,0 +1,12 @@
+photo of the {0} and {1}. 
+A playful {0} batting a {1} on a sunny beach.
+{0} lounging beside a {1} atop a towering skyscraper.
+The {0} curiously eyeing a {1} in the middle of a jungle.
+{0} playing with a {1} on a sidewalk.
+A pet {0} playing with {1} on a sofa.
+The {0} reaching for the {1} under a table.
+A watercolor painting of {1} and a {0}.
+Oil painting of the {0} playing with the {1}.
+A digital rendering of {0} and the {1}.
+the {0} plushie in the style of a {1}.
+Marble statue of a {1} and {0} in a garden.

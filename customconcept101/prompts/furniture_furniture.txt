@@ -1,0 +1,12 @@
+photo of the {0} and {1}.
+photo of {0} and {1} in a garden.
+{1} and {0} and mountains in the background.
+{0} and {1} with a floor lamp on the side.
+{1} and {0} near a pool.
+Watercolor painting of the {0} and {1}.
+The {0} and {1}, digital illustration.
+Georgia O'Keeffe style painting of the {1} and {0}.
+The {0} and {1} in front of a floor-to-ceiling windows overlooking a cityscape.
+A purple {1} beside the {0}.
+A cat sitting on the {1} beside a {0}.
+A purple {0} beside the {1}.

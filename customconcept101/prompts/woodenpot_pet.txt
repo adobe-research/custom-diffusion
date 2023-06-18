@@ -1,0 +1,12 @@
+photo of the {1} and {0}. 
+the {1} is looking from inside the {0}.
+the {1} playing with a {0} in a garden.
+A small {1} inside the {0}
+the {1} is sitting inside a {0} and looking up
+the {1} is wearing sunglasses and playing with a {0} 
+rose flowers in the {0} on a table, and the {1} is looking at the flowers.
+A watercolor painting of {0} and a {1}.
+Oil painting of the {1} playing with the {0}.
+Mosaic art of {1} sitting inside the {0}.
+{1} engraving on the {0}.
+the {1} sculpture in the style of a {0}.

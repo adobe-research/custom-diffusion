@@ -1,0 +1,12 @@
+photo of {0} wearing the {1}.
+A wide shot of {0} wearing {1} with boston city in background.
+A long shot of {0} walking their golden retriever, wearing {1}. 
+{0} sitting on the sidewalk wearing {1}.
+{0} standing at a graffiti wall, showcasing their new {1}.
+close shot of {0} walking on a ramp wearing {1}.
+Watercolor painting of {0} wearing {1}.
+mosaic art of {0} wearing {1}.
+mosaic art of {0} wearing {1} sitting on a plush sofa.
+{0} stepping out of a taxi in {1}.
+close shot of {0} walking in rain wearing {1}.
+long shot of {0} sitting on the edge of a roof wearing {1}.

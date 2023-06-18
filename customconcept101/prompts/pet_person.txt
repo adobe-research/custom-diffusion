@@ -1,0 +1,12 @@
+photo of the {0} with {1}. 
+{0} and their pet {1} watching the sunset on a tranquil beach.
+A selfie of {0} with their pet {1}.
+{0} playing with {1}.
+{0} reading a book with {1} curled up next.
+{1} lounging on the {0}'s lap. 
+{0} feeding the {1} on the deck of a ship.
+A pointillist painting of the {0} and {1}.
+An impressionist painting of the {0} and {1} sitting.
+A black-and-white photograph of the {0} holding {1}.
+A selfie of {0} and their pet {1}, both wearing sunglasses.
+{0} painting their pet {1} on a canvas.

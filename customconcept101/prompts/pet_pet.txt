@@ -1,0 +1,12 @@
+A photo of the {0} and {1}.
+the {0} and {1} sitting on an antique table. 
+the {0} and {1} sitting on beach with a view of seashore. 
+{1} and {0} side by side on a mountaintop, overlooking a sunrise.
+photo of {0} and {1} on a surfboard together in the middle of a clear blue ocean. 
+{0} playing with {1}.
+A pointillist painting of the {0} and {1}.
+An impressionist painting of the {0} and {1} sitting on a sofa.
+A black-and-white photograph of the {1} playing with {0}.
+{0} playing with a robot toy {1}.
+{1} playing with a robot toy {0}.
+A plush toy replica of the {0} and {1} sitting beside it.

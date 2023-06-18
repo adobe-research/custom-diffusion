@@ -1,0 +1,12 @@
+photo of the {0} and {1}. 
+A {0} lounging on a {1} on a sunny beach.
+A {0} sleeping on a purple {1}.
+A {0} sleeping on the {1} in a snowy winter landscape.
+A {0} relaxing on a {1} on a rooftop, with the city in the background.
+An impressionistic rendering of a {0} lounging on a {1}.
+A watercolor painting of a {0} perched on a {1}.
+A digital cartoon of the {0} lazing on a {1}.
+A {0} and a golden retriever peacefully sleeping on {1}.
+A {0} curled up on the {1} with a book on the side.
+Photo of the {0} wearing sunglasses and sitting on {1}. 
+A minimalist painting of the {0} on a {1}, with a goldfish swimming in a bowl next to it.

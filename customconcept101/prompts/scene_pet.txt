@@ -1,0 +1,12 @@
+photo of {0} and the {1}.
+{1} in front of {0}.
+{1} wearing sunglasses in front of {0}.
+{1} in front of {0} in snowy ice.
+A photo of {0} at dawn with {0} sleeping peacefully.
+mountains in the background and {1} in front of {0}.
+Watercolor painting of the {1} in front of the {0}.
+A digital illustration of the {1} in front of {0}.
+mosaic art of the {1} in front of {0}.
+A black marble statue of the {1} in front of {0}.
+{1} playing with a hedgehog in front of {0}.
+{0} in fall season, {1} playing with a ball. 

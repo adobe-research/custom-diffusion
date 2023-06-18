@@ -1,0 +1,1921 @@
+[
+    [
+        {
+            "instance_prompt": "photo of a <new1> sofa",
+            "class_prompt": "sofa",
+            "instance_data_dir": "./benchmark_dataset/furniture_sofa1",
+            "class_data_dir": "./regularization/furniture_sofa",
+            "prompt_filename": "prompts/sofa.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair1",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair2",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> table",
+            "class_prompt": "table",
+            "instance_data_dir": "./benchmark_dataset/furniture_table1",
+            "class_data_dir": "./regularization/furniture_table",
+            "prompt_filename": "prompts/table.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair3",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> sofa",
+            "class_prompt": "sofa",
+            "instance_data_dir": "./benchmark_dataset/furniture_sofa2",
+            "class_data_dir": "./regularization/furniture_sofa",
+            "prompt_filename": "prompts/sofa.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> table",
+            "class_prompt": "table",
+            "instance_data_dir": "./benchmark_dataset/furniture_table1",
+            "class_data_dir": "./regularization/furniture_table",
+            "prompt_filename": "prompts/table.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair1",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair1",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> sofa",
+            "class_prompt": "sofa",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair3",
+            "class_data_dir": "./regularization/furniture_sofa",
+            "prompt_filename": "prompts/sofa.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> sofa",
+            "class_prompt": "sofa",
+            "instance_data_dir": "./benchmark_dataset/furniture_sofa1",
+            "class_data_dir": "./regularization/furniture_sofa",
+            "prompt_filename": "prompts/sofa.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cup",
+            "class_prompt": "cup",
+            "instance_data_dir": "./benchmark_dataset/things_cup2",
+            "class_data_dir": "./regularization/things_cup",
+            "prompt_filename": "prompts/cup.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_things.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair2",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> keychain",
+            "class_prompt": "keychain",
+            "instance_data_dir": "./benchmark_dataset/things_keychain1",
+            "class_data_dir": "./regularization/things_keychain",
+            "prompt_filename": "prompts/things.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_things.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair3",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cup",
+            "class_prompt": "cup",
+            "instance_data_dir": "./benchmark_dataset/things_cup3",
+            "class_data_dir": "./regularization/things_cup",
+            "prompt_filename": "prompts/cup.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_things.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair1",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> headphone",
+            "class_prompt": "headphone",
+            "instance_data_dir": "./benchmark_dataset/things_headphone1",
+            "class_data_dir": "./regularization/things_headphone",
+            "prompt_filename": "prompts/headphone.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_things.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> sofa",
+            "class_prompt": "sofa",
+            "instance_data_dir": "./benchmark_dataset/furniture_sofa1",
+            "class_data_dir": "./regularization/furniture_sofa",
+            "prompt_filename": "prompts/sofa.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cup",
+            "class_prompt": "cup",
+            "instance_data_dir": "./benchmark_dataset/things_cup1",
+            "class_data_dir": "./regularization/things_cup",
+            "prompt_filename": "prompts/cup.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_things.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair3",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> helmet",
+            "class_prompt": "helmet",
+            "instance_data_dir": "./benchmark_dataset/things_helmet",
+            "class_data_dir": "./regularization/things_helmet",
+            "prompt_filename": "prompts/things.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_things.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair3",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> book",
+            "class_prompt": "book",
+            "instance_data_dir": "./benchmark_dataset/things_book2",
+            "class_data_dir": "./regularization/things_book",
+            "prompt_filename": "prompts/things.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_things.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair1",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> book",
+            "class_prompt": "book",
+            "instance_data_dir": "./benchmark_dataset/things_book",
+            "class_data_dir": "./regularization/things_book",
+            "prompt_filename": "prompts/things.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_things.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair1",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> headphone",
+            "class_prompt": "headphone",
+            "instance_data_dir": "./benchmark_dataset/things_headphone2",
+            "class_data_dir": "./regularization/things_headphone",
+            "prompt_filename": "prompts/headphone.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_things.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> sofa",
+            "class_prompt": "sofa",
+            "instance_data_dir": "./benchmark_dataset/furniture_sofa1",
+            "class_data_dir": "./regularization/furniture_sofa",
+            "prompt_filename": "prompts/sofa.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> bottle",
+            "class_prompt": "bottle",
+            "instance_data_dir": "./benchmark_dataset/things_bottle1",
+            "class_data_dir": "./regularization/things_bottle",
+            "prompt_filename": "prompts/things.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/furniture_things.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_1",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "instance_prompt": "photo of <new2> sunglasses",
+            "class_prompt": "sunglasses",
+            "instance_data_dir": "./benchmark_dataset/wearable_sunglasses2",
+            "class_data_dir": "./regularization/wearable_sunglasses",
+            "prompt_filename": "prompts/sunglasses.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/person_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_2",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> jacket",
+            "class_prompt": "jacket",
+            "instance_data_dir": "./benchmark_dataset/wearable_jacket2",
+            "class_data_dir": "./regularization/wearable_jacket",
+            "prompt_filename": "prompts/jacket.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/person_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_3",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> glasses",
+            "class_prompt": "glasses",
+            "instance_data_dir": "./benchmark_dataset/wearable_glasses",
+            "class_data_dir": "./regularization/wearable_glasses",
+            "prompt_filename": "prompts/glasses.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/person_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_1",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> shoes",
+            "class_prompt": "shoes",
+            "instance_data_dir": "./benchmark_dataset/wearable_shoes2",
+            "class_data_dir": "./regularization/wearable_shoes",
+            "prompt_filename": "prompts/shoes.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/person_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_2",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> jacket",
+            "class_prompt": "jacket",
+            "instance_data_dir": "./benchmark_dataset/wearable_jacket1",
+            "class_data_dir": "./regularization/wearable_jacket",
+            "prompt_filename": "prompts/jacket.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/person_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_3",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> sunglasses",
+            "class_prompt": "sunglasses",
+            "instance_data_dir": "./benchmark_dataset/wearable_sunglasses1",
+            "class_data_dir": "./regularization/wearable_sunglasses",
+            "prompt_filename": "prompts/sunglasses.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/person_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_1",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> shoes",
+            "class_prompt": "shoes",
+            "instance_data_dir": "./benchmark_dataset/wearable_shoes1",
+            "class_data_dir": "./regularization/wearable_shoes",
+            "prompt_filename": "prompts/shoes.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/person_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog1",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> sofa",
+            "class_prompt": "sofa",
+            "instance_data_dir": "./benchmark_dataset/furniture_sofa1",
+            "class_data_dir": "./regularization/furniture_sofa",
+            "prompt_filename": "prompts/sofa.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat1",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair2",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat6",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair3",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog3",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> sofa",
+            "class_prompt": "sofa",
+            "instance_data_dir": "./benchmark_dataset/furniture_sofa2",
+            "class_data_dir": "./regularization/furniture_sofa",
+            "prompt_filename": "prompts/sofa.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog4",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair1",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog2",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> sofa",
+            "class_prompt": "sofa",
+            "instance_data_dir": "./benchmark_dataset/furniture_sofa1",
+            "class_data_dir": "./regularization/furniture_sofa",
+            "prompt_filename": "prompts/sofa.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat3",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair2",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat4",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> table",
+            "class_prompt": "table",
+            "instance_data_dir": "./benchmark_dataset/furniture_table1",
+            "class_data_dir": "./regularization/furniture_table",
+            "prompt_filename": "prompts/table.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat5",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> sofa",
+            "class_prompt": "sofa",
+            "instance_data_dir": "./benchmark_dataset/furniture_sofa2",
+            "class_data_dir": "./regularization/furniture_sofa",
+            "prompt_filename": "prompts/sofa.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat7",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair3",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat2",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> chair",
+            "class_prompt": "chair",
+            "instance_data_dir": "./benchmark_dataset/furniture_chair1",
+            "class_data_dir": "./regularization/furniture_chair",
+            "prompt_filename": "prompts/chair.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_furniture.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat1",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog2",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat2",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog3",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat3",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog4",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat4",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog1",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat5",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog2",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat6",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog3",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat7",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog4",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog1",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_2",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat1",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_2",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat6",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_3",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog3",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_1",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog4",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_2",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog2",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_3",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat3",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_1",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat4",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_2",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat5",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_3",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat2",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_1",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog1",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cow plushie",
+            "class_prompt": "cow plushie",
+            "instance_data_dir": "./benchmark_dataset/plushie_cow",
+            "class_data_dir": "./regularization/plushie_cow",
+            "prompt_filename": "prompts/plushie.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_plushie.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat1",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> plushie",
+            "class_prompt": "plushie",
+            "instance_data_dir": "./benchmark_dataset/plushie_happysad",
+            "class_data_dir": "./regularization/plushie",
+            "prompt_filename": "prompts/plushie.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_plushie.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat6",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> panda plushie",
+            "class_prompt": "panda plushie",
+            "instance_data_dir": "./benchmark_dataset/plushie_panda",
+            "class_data_dir": "./regularization/plushie_panda",
+            "prompt_filename": "prompts/plushie.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_plushie.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog3",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> lobster plushie",
+            "class_prompt": "lobster plushie",
+            "instance_data_dir": "./benchmark_dataset/plushie_lobster",
+            "class_data_dir": "./regularization/plushie_lobster",
+            "prompt_filename": "prompts/plushie.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_plushie.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog4",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> penguin plushie",
+            "class_prompt": "penguin plushie",
+            "instance_data_dir": "./benchmark_dataset/plushie_penguin",
+            "class_data_dir": "./regularization/plushie_penguin",
+            "prompt_filename": "prompts/plushie.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_plushie.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog2",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dice plushie",
+            "class_prompt": "dice",
+            "instance_data_dir": "./benchmark_dataset/plushie_dice",
+            "class_data_dir": "./regularization/plushie_dice",
+            "prompt_filename": "prompts/plushie.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_plushie.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat3",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> bunny plushie",
+            "class_prompt": "bunny plushie",
+            "instance_data_dir": "./benchmark_dataset/plushie_bunny",
+            "class_data_dir": "./regularization/plushie_bunny",
+            "prompt_filename": "prompts/plushie.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_plushie.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat4",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> plushie",
+            "class_prompt": "plushie",
+            "instance_data_dir": "./benchmark_dataset/plushie_sadangry",
+            "class_data_dir": "./regularization/plushie",
+            "prompt_filename": "prompts/plushie.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_plushie.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat5",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> tortoise plushie",
+            "class_prompt": "tortoise plushie",
+            "instance_data_dir": "./benchmark_dataset/plushie_tortoise",
+            "class_data_dir": "./regularization/plushie_tortoise",
+            "prompt_filename": "prompts/plushie.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_plushie.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat2",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> pokemon plushie",
+            "class_prompt": "pokemon plushie",
+            "instance_data_dir": "./benchmark_dataset/plushie_2",
+            "class_data_dir": "./regularization/pokemon_plushie",
+            "prompt_filename": "prompts/plushie.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_plushie.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog1",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of <new2> sunglasses",
+            "class_prompt": "sunglasses",
+            "instance_data_dir": "./benchmark_dataset/wearable_sunglasses2",
+            "class_data_dir": "./regularization/wearable_sunglasses",
+            "prompt_filename": "prompts/sunglasses.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat1",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> jacket",
+            "class_prompt": "jacket",
+            "instance_data_dir": "./benchmark_dataset/wearable_jacket2",
+            "class_data_dir": "./regularization/wearable_jacket",
+            "prompt_filename": "prompts/jacket.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat6",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> glasses",
+            "class_prompt": "glasses",
+            "instance_data_dir": "./benchmark_dataset/wearable_glasses",
+            "class_data_dir": "./regularization/wearable_glasses",
+            "prompt_filename": "prompts/glasses.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog3",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> shoes",
+            "class_prompt": "shoes",
+            "instance_data_dir": "./benchmark_dataset/wearable_shoes2",
+            "class_data_dir": "./regularization/wearable_shoes",
+            "prompt_filename": "prompts/shoes.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog4",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> jacket",
+            "class_prompt": "jacket",
+            "instance_data_dir": "./benchmark_dataset/wearable_jacket1",
+            "class_data_dir": "./regularization/wearable_jacket",
+            "prompt_filename": "prompts/jacket.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog2",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> sunglasses",
+            "class_prompt": "sunglasses",
+            "instance_data_dir": "./benchmark_dataset/wearable_sunglasses1",
+            "class_data_dir": "./regularization/wearable_sunglasses",
+            "prompt_filename": "prompts/sunglasses.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat3",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> shoes",
+            "class_prompt": "shoes",
+            "instance_data_dir": "./benchmark_dataset/wearable_shoes1",
+            "class_data_dir": "./regularization/wearable_shoes",
+            "prompt_filename": "prompts/shoes.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat4",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of <new2> sunglasses",
+            "class_prompt": "sunglasses",
+            "instance_data_dir": "./benchmark_dataset/wearable_sunglasses2",
+            "class_data_dir": "./regularization/wearable_sunglasses",
+            "prompt_filename": "prompts/sunglasses.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat5",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> jacket",
+            "class_prompt": "jacket",
+            "instance_data_dir": "./benchmark_dataset/wearable_jacket2",
+            "class_data_dir": "./regularization/wearable_jacket",
+            "prompt_filename": "prompts/jacket.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat2",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> glasses",
+            "class_prompt": "glasses",
+            "instance_data_dir": "./benchmark_dataset/wearable_glasses",
+            "class_data_dir": "./regularization/wearable_glasses",
+            "prompt_filename": "prompts/glasses.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_wearable.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog1",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> toy",
+            "class_prompt": "toy",
+            "instance_data_dir": "./benchmark_dataset/toy_unicorn",
+            "class_data_dir": "./regularization/toy",
+            "prompt_filename": "prompts/toy.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_toy.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat1",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> bear",
+            "class_prompt": "bear",
+            "instance_data_dir": "./benchmark_dataset/toy_bear",
+            "class_data_dir": "./regularization/toy_bear",
+            "prompt_filename": "prompts/toy.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_toy.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat6",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> kids table chair",
+            "class_prompt": "kids table chair",
+            "instance_data_dir": "./benchmark_dataset/toy_tablechair",
+            "class_data_dir": "./regularization/toy_tablechair",
+            "prompt_filename": "prompts/toy.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_toy.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog3",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> pokemon toy",
+            "class_prompt": "pokemon toy",
+            "instance_data_dir": "./benchmark_dataset/toy_pikachu1",
+            "class_data_dir": "./regularization/pokemon_toy",
+            "prompt_filename": "prompts/toy.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_toy.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog4",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> toy gnome",
+            "class_prompt": "toy gnome",
+            "instance_data_dir": "./benchmark_dataset/toy_gnome",
+            "class_data_dir": "./regularization/toy_gnome",
+            "prompt_filename": "prompts/toy.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_toy.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> barn",
+            "class_prompt": "barn",
+            "instance_data_dir": "./benchmark_dataset/scene_barn",
+            "class_data_dir": "./regularization/scene_barn",
+            "prompt_filename": "prompts/barn.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_1",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> lighthouse",
+            "class_prompt": "lighthouse",
+            "instance_data_dir": "./benchmark_dataset/scene_lighthouse",
+            "class_data_dir": "./regularization/scene_lighthouse",
+            "prompt_filename": "prompts/lighthouse.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_2",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> castle",
+            "class_prompt": "castle",
+            "instance_data_dir": "./benchmark_dataset/scene_castle",
+            "class_data_dir": "./regularization/scene_castle",
+            "prompt_filename": "prompts/castle.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_3",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> sculpture",
+            "class_prompt": "sculpture",
+            "instance_data_dir": "./benchmark_dataset/scene_sculpture1",
+            "class_data_dir": "./regularization/scene_sculpture",
+            "prompt_filename": "prompts/sculpture.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_1",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> waterfall",
+            "class_prompt": "waterfall",
+            "instance_data_dir": "./benchmark_dataset/scene_waterfall",
+            "class_data_dir": "./regularization/scene_waterfall",
+            "prompt_filename": "prompts/waterfall.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_2",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> canal scene",
+            "class_prompt": "canal scene",
+            "instance_data_dir": "./benchmark_dataset/scene_canal",
+            "class_data_dir": "./regularization/scene_canal",
+            "prompt_filename": "prompts/canal.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_3",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> garden",
+            "class_prompt": "garden",
+            "instance_data_dir": "./benchmark_dataset/scene_garden",
+            "class_data_dir": "./regularization/scene_garden",
+            "prompt_filename": "prompts/garden.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> person",
+            "class_prompt": "person",
+            "instance_data_dir": "./benchmark_dataset/person_3",
+            "class_data_dir": "./regularization/person",
+            "prompt_filename": "prompts/person.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_person.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> barn",
+            "class_prompt": "barn",
+            "instance_data_dir": "./benchmark_dataset/scene_barn",
+            "class_data_dir": "./regularization/scene_barn",
+            "prompt_filename": "prompts/barn.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog1",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> lighthouse",
+            "class_prompt": "lighthouse",
+            "instance_data_dir": "./benchmark_dataset/scene_lighthouse",
+            "class_data_dir": "./regularization/scene_lighthouse",
+            "prompt_filename": "prompts/lighthouse.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat1",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> castle",
+            "class_prompt": "castle",
+            "instance_data_dir": "./benchmark_dataset/scene_castle",
+            "class_data_dir": "./regularization/scene_castle",
+            "prompt_filename": "prompts/castle.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat6",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> sculpture",
+            "class_prompt": "sculpture",
+            "instance_data_dir": "./benchmark_dataset/scene_sculpture1",
+            "class_data_dir": "./regularization/scene_sculpture",
+            "prompt_filename": "prompts/sculpture.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog3",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> waterfall",
+            "class_prompt": "waterfall",
+            "instance_data_dir": "./benchmark_dataset/scene_waterfall",
+            "class_data_dir": "./regularization/scene_waterfall",
+            "prompt_filename": "prompts/waterfall.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog4",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> canal scene",
+            "class_prompt": "canal scene",
+            "instance_data_dir": "./benchmark_dataset/scene_canal",
+            "class_data_dir": "./regularization/scene_canal",
+            "prompt_filename": "prompts/canal.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog2",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> garden",
+            "class_prompt": "garden",
+            "instance_data_dir": "./benchmark_dataset/scene_garden",
+            "class_data_dir": "./regularization/scene_garden",
+            "prompt_filename": "prompts/garden.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat3",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/scene_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> vase",
+            "class_prompt": "vase",
+            "instance_data_dir": "./benchmark_dataset/decoritems_vase2",
+            "class_data_dir": "./regularization/decoritems_vase",
+            "prompt_filename": "prompts/vase.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> flower",
+            "class_prompt": "flower",
+            "instance_data_dir": "./benchmark_dataset/flower_1",
+            "class_data_dir": "./regularization/things_flower",
+            "prompt_filename": "prompts/flower.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/vase_flower.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> vase",
+            "class_prompt": "vase",
+            "instance_data_dir": "./benchmark_dataset/decoritems_vase2",
+            "class_data_dir": "./regularization/decoritems_vase",
+            "prompt_filename": "prompts/vase.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> flower",
+            "class_prompt": "flower",
+            "instance_data_dir": "./benchmark_dataset/flower_2",
+            "class_data_dir": "./regularization/things_flower",
+            "prompt_filename": "prompts/flower.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/vase_flower.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> wooden pot",
+            "class_prompt": "wooden pot",
+            "instance_data_dir": "./benchmark_dataset/decoritems_woodenpot",
+            "class_data_dir": "./regularization/decoritems_woodenpot",
+            "prompt_filename": "prompts/woodenpot.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> flower",
+            "class_prompt": "flower",
+            "instance_data_dir": "./benchmark_dataset/flower_1",
+            "class_data_dir": "./regularization/things_flower",
+            "prompt_filename": "prompts/flower.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/woodenpot_flower.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> wooden pot",
+            "class_prompt": "wooden pot",
+            "instance_data_dir": "./benchmark_dataset/decoritems_woodenpot",
+            "class_data_dir": "./regularization/decoritems_woodenpot",
+            "prompt_filename": "prompts/woodenpot.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> flower",
+            "class_prompt": "flower",
+            "instance_data_dir": "./benchmark_dataset/flower_2",
+            "class_data_dir": "./regularization/things_flower",
+            "prompt_filename": "prompts/flower.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/woodenpot_flower.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> wooden pot",
+            "class_prompt": "wooden pot",
+            "instance_data_dir": "./benchmark_dataset/decoritems_woodenpot",
+            "class_data_dir": "./regularization/decoritems_woodenpot",
+            "prompt_filename": "prompts/woodenpot.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat1",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/woodenpot_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> wooden pot",
+            "class_prompt": "wooden pot",
+            "instance_data_dir": "./benchmark_dataset/decoritems_woodenpot",
+            "class_data_dir": "./regularization/decoritems_woodenpot",
+            "prompt_filename": "prompts/woodenpot.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat2",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/woodenpot_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> wooden pot",
+            "class_prompt": "wooden pot",
+            "instance_data_dir": "./benchmark_dataset/decoritems_woodenpot",
+            "class_data_dir": "./regularization/decoritems_woodenpot",
+            "prompt_filename": "prompts/woodenpot.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat3",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/woodenpot_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> wooden pot",
+            "class_prompt": "wooden pot",
+            "instance_data_dir": "./benchmark_dataset/decoritems_woodenpot",
+            "class_data_dir": "./regularization/decoritems_woodenpot",
+            "prompt_filename": "prompts/woodenpot.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat4",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/woodenpot_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> wooden pot",
+            "class_prompt": "wooden pot",
+            "instance_data_dir": "./benchmark_dataset/decoritems_woodenpot",
+            "class_data_dir": "./regularization/decoritems_woodenpot",
+            "prompt_filename": "prompts/woodenpot.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat5",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/woodenpot_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> wooden pot",
+            "class_prompt": "wooden pot",
+            "instance_data_dir": "./benchmark_dataset/decoritems_woodenpot",
+            "class_data_dir": "./regularization/decoritems_woodenpot",
+            "prompt_filename": "prompts/woodenpot.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat6",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/woodenpot_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog1",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> dog",
+            "class_prompt": "dog",
+            "instance_data_dir": "./benchmark_dataset/pet_dog2",
+            "class_data_dir": "./regularization/pet_dog",
+            "prompt_filename": "prompts/dog.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_pet.txt"
+        }
+    ],
+    [
+        {
+            "instance_prompt": "photo of a <new1> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat1",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "instance_prompt": "photo of a <new2> cat",
+            "class_prompt": "cat",
+            "instance_data_dir": "./benchmark_dataset/pet_cat3",
+            "class_data_dir": "./regularization/pet_cat",
+            "prompt_filename": "prompts/cat.txt"
+        },
+        {
+            "prompt_filename_compose": "prompts/pet_pet.txt"
+        }
+    ]
+]
