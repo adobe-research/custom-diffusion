@@ -1,6 +1,6 @@
 # CustomConcept101
 
-We release a dataset of 101 concepts with 3-15 images for each concept for evaluating model customization methods. For a more detailed view target images please refer to our [webpage](https://www.cs.cmu.edu/~custom-diffusion/dataset.html). 
+We release a dataset of 101 concepts with 3-15 images for each concept for evaluating model customization methods. For a more detailed view of target images please refer to our [webpage](https://www.cs.cmu.edu/~custom-diffusion/dataset.html). 
 
 <br>
 <div>
@@ -128,9 +128,13 @@ We compare our method (Custom Diffusion) with [DreamBooth](https://dreambooth.gi
   </tr>
 </table>
 
+## Evaluation prompts 
+We used ChatGPT to generate 40 image captions for each concept with the instructions to either (1) change the background of the scene while keeping the main subject, (2) insert a new object/living thing in the scene along with the main subject, (3) style variation of the main subject, and (4) change the property or material of the main subject. The generated text prompts are manually filtered or modified to get the final 20 prompts for each concept. A similar strategy is applied for multiple concepts. Some of the prompts are also inspired by other concurrent works e.g. [Perfusion](https://research.nvidia.com/labs/par/Perfusion/), [DreamBooth](https://dreambooth.github.io), [SuTI](https://open-vision-language.github.io/suti/), [BLIP-Diffusion](https://dxli94.github.io/BLIP-Diffusion-website/) etc.
+  
+
 
 ## License
-Images taken from UnSplash are under [Unsplash License](https://unsplash.com/license). Images captured by ourselves are released under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) license. Flower category images are downloaded from Wikimedia/Flickr/Pixabay and the link to orginial images can be found [here](https://www.cs.cmu.edu/~custom-diffusion/assets/urls.txt).   
+Images taken from UnSplash are under [Unsplash License](https://unsplash.com/license). Images captured by ourselves are released under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) license. Flower category images are downloaded from Wikimedia/Flickr/Pixabay and the link to orginial images can also be found [here](https://www.cs.cmu.edu/~custom-diffusion/assets/urls.txt) for attribution.   
 
 
 ## Acknowledgments

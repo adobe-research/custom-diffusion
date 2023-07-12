@@ -1,9 +1,11 @@
 # Custom Diffusion
 
-### [website](https://www.cs.cmu.edu/~custom-diffusion/)  | [paper](http://arxiv.org/abs/2212.04488) | [gradio demo](https://huggingface.co/spaces/nupurkmr9/custom-diffusion)
+### [website](https://www.cs.cmu.edu/~custom-diffusion/)  | [paper](http://arxiv.org/abs/2212.04488) 
 
 
 **[NEW!]** Custom Diffusion is now supported in diffusers. Please [refer](https://github.com/huggingface/diffusers/tree/main/examples/custom_diffusion) here for training and inference details. 
+
+**[NEW!]** CustomConcept101 dataset. We release a new dataset of 101 concepts along with their evaluation prompts. For more details please refer [here](customconcept101/README.md).  
 
 
 <br>
