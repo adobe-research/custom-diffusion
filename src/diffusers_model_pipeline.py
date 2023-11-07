@@ -212,14 +212,16 @@
 #    limitations under the License.
 from typing import Callable, Optional
 import torch
-from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
+from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer, CLIPTextModelWithProjection
 from accelerate.logging import get_logger
 
 from diffusers.models import AutoencoderKL, UNet2DConditionModel
 from diffusers.schedulers.scheduling_utils import SchedulerMixin
+from diffusers.schedulers import KarrasDiffusionSchedulers
 from diffusers.pipelines.stable_diffusion import StableDiffusionPipeline
+from diffusers.pipelines.stable_diffusion_xl import StableDiffusionXLPipeline
 from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-from diffusers.models.cross_attention import CrossAttention
+from diffusers.models.attention import Attention
 from diffusers.utils.import_utils import is_xformers_available
 
 if is_xformers_available():
@@ -277,7 +279,7 @@ def set_use_memory_efficient_attention_xformers(
 class CustomDiffusionAttnProcessor:
     def __call__(
         self,
-        attn: CrossAttention,
+        attn: Attention,
         hidden_states,
         encoder_hidden_states=None,
         attention_mask=None,
@@ -291,8 +293,8 @@ class CustomDiffusionAttnProcessor:
             encoder_hidden_states = hidden_states
         else:
             crossattn = True
-            if attn.cross_attention_norm:
-                encoder_hidden_states = attn.norm_cross(encoder_hidden_states)
+            if attn.norm_cross:
+                encoder_hidden_states = attn.norm_encoder_hidden_states(encoder_hidden_states)
 
         key = attn.to_k(encoder_hidden_states)
         value = attn.to_v(encoder_hidden_states)
@@ -322,7 +324,7 @@ class CustomDiffusionXFormersAttnProcessor:
     def __init__(self, attention_op: Optional[Callable] = None):
         self.attention_op = attention_op
 
-    def __call__(self, attn: CrossAttention, hidden_states, encoder_hidden_states=None, attention_mask=None):
+    def __call__(self, attn: Attention, hidden_states, encoder_hidden_states=None, attention_mask=None):
         batch_size, sequence_length, _ = hidden_states.shape
 
         attention_mask = attn.prepare_attention_mask(attention_mask, sequence_length, batch_size)
@@ -496,3 +498,144 @@ class CustomDiffusionPipeline(StableDiffusionPipeline):
                     params.data += st['unet'][name]['u']@st['unet'][name]['v']
                 elif name in st['unet']:
                     params.data.copy_(st['unet'][f'{name}'])
+
+
+class CustomDiffusionXLPipeline(StableDiffusionXLPipeline):
+    r"""
+    Pipeline for custom diffusion model.
+
+    This model inherits from [`DiffusionPipeline`]. Check the superclass documentation for the generic methods the
+    library implements for all the pipelines (such as downloading or saving, running on a particular device, etc.).
+
+    Args:
+        vae ([`AutoencoderKL`]):
+            Variational Auto-Encoder (VAE) Model to encode and decode images to and from latent representations.
+        text_encoder ([`CLIPTextModel`]):
+            Frozen text-encoder. Stable Diffusion XL uses the text portion of
+            [CLIP](https://huggingface.co/docs/transformers/model_doc/clip#transformers.CLIPTextModel), specifically
+            the [clip-vit-large-patch14](https://huggingface.co/openai/clip-vit-large-patch14) variant.
+        text_encoder_2 ([` CLIPTextModelWithProjection`]):
+            Second frozen text-encoder. Stable Diffusion XL uses the text and pool portion of
+            [CLIP](https://huggingface.co/docs/transformers/model_doc/clip#transformers.CLIPTextModelWithProjection),
+            specifically the
+            [laion/CLIP-ViT-bigG-14-laion2B-39B-b160k](https://huggingface.co/laion/CLIP-ViT-bigG-14-laion2B-39B-b160k)
+            variant.
+        tokenizer (`CLIPTokenizer`):
+            Tokenizer of class
+            [CLIPTokenizer](https://huggingface.co/docs/transformers/v4.21.0/en/model_doc/clip#transformers.CLIPTokenizer).
+        tokenizer_2 (`CLIPTokenizer`):
+            Second Tokenizer of class
+            [CLIPTokenizer](https://huggingface.co/docs/transformers/v4.21.0/en/model_doc/clip#transformers.CLIPTokenizer).
+        unet ([`UNet2DConditionModel`]): Conditional U-Net architecture to denoise the encoded image latents.
+        scheduler ([`SchedulerMixin`]):
+            A scheduler to be used in combination with `unet` to denoise the encoded image latents. Can be one of
+            [`DDIMScheduler`], [`LMSDiscreteScheduler`], or [`PNDMScheduler`].
+        force_zeros_for_empty_prompt (`bool`, *optional*, defaults to `"True"`):
+            Whether the negative prompt embeddings shall be forced to always be set to 0. Also see the config of
+            `stabilityai/stable-diffusion-xl-base-1-0`.
+        add_watermarker (`bool`, *optional*):
+            Whether to use the [invisible_watermark library](https://github.com/ShieldMnt/invisible-watermark/) to
+            watermark output images. If not defined, it will default to True if the package is installed, otherwise no
+            watermarker will be used.
+        modifier_token: list of new modifier tokens added or to be added to text_encoder
+        modifier_token_id: list of id of new modifier tokens added or to be added to text_encoder
+        modifier_token_id_2: list of id of new modifier tokens added or to be added to text_encoder_2
+    """
+
+    def __init__(
+        self,
+        vae: AutoencoderKL,
+        text_encoder: CLIPTextModel,
+        text_encoder_2: CLIPTextModelWithProjection,
+        tokenizer: CLIPTokenizer,
+        tokenizer_2: CLIPTokenizer,
+        unet: UNet2DConditionModel,
+        scheduler: KarrasDiffusionSchedulers,
+        force_zeros_for_empty_prompt: bool = True,
+        add_watermarker: Optional[bool] = None,
+        modifier_token: list = [],
+        modifier_token_id: list = [],
+        modifier_token_id_2: list = []
+    ):
+        super().__init__(vae,
+                         text_encoder,
+                         text_encoder_2,
+                         tokenizer,
+                         tokenizer_2,
+                         unet,
+                         scheduler,
+                         force_zeros_for_empty_prompt,
+                         add_watermarker,
+                         )
+
+        # change attn class
+        self.modifier_token = modifier_token
+        self.modifier_token_id = modifier_token_id
+        self.modifier_token_id_2 = modifier_token_id_2
+
+    def save_pretrained(self, save_path, freeze_model="crossattn_kv", save_text_encoder=False, all=False):
+        if all:
+            super().save_pretrained(save_path)
+        else:
+            delta_dict = {'unet': {}, 'modifier_token': {}}
+            if self.modifier_token is not None:
+                print(self.modifier_token_id, self.modifier_token)
+                for i in range(len(self.modifier_token_id)):
+                    delta_dict['modifier_token'][self.modifier_token[i]] = []
+                    learned_embeds = self.text_encoder.get_input_embeddings().weight[self.modifier_token_id[i]]
+                    learned_embeds_2 = self.text_encoder_2.get_input_embeddings().weight[self.modifier_token_id_2[i]]
+                    delta_dict['modifier_token'][self.modifier_token[i]].append(learned_embeds.detach().cpu())
+                    delta_dict['modifier_token'][self.modifier_token[i]].append(learned_embeds_2.detach().cpu())
+            if save_text_encoder:
+                delta_dict['text_encoder'] = self.text_encoder.state_dict()
+                delta_dict['text_encoder_2'] = self.text_encoder_2.state_dict()
+            for name, params in self.unet.named_parameters():
+                if freeze_model == "crossattn":
+                    if 'attn2' in name:
+                        delta_dict['unet'][name] = params.cpu().clone()
+                elif freeze_model == "crossattn_kv":
+                    if 'attn2.to_k' in name or 'attn2.to_v' in name:
+                        delta_dict['unet'][name] = params.cpu().clone()
+                else:
+                    raise ValueError(
+                            "freeze_model argument only supports crossattn_kv or crossattn"
+                        )
+            torch.save(delta_dict, save_path)
+
+    def load_model(self, save_path, compress=False):
+        st = torch.load(save_path)
+        if 'text_encoder' in st:
+            self.text_encoder.load_state_dict(st['text_encoder'])
+            self.text_encoder_2.load_state_dict(st['text_encoder_2'])
+        if 'modifier_token' in st:
+            modifier_tokens = list(st['modifier_token'].keys())
+            modifier_token_id = []
+            modifier_token_id_2 = []
+            for modifier_token in modifier_tokens:
+                num_added_tokens = self.tokenizer.add_tokens(modifier_token)
+                num_added_tokens_2 = self.tokenizer_2.add_tokens(modifier_token)
+                if num_added_tokens == 0 or num_added_tokens_2 == 0:
+                    raise ValueError(
+                        f"The tokenizer already contains the token {modifier_token}. Please pass a different"
+                        " `modifier_token` that is not already in the tokenizer."
+                    )
+                    
+                modifier_token_id.append(self.tokenizer.convert_tokens_to_ids(modifier_token))
+                modifier_token_id_2.append(self.tokenizer_2.convert_tokens_to_ids(modifier_token))
+            # Resize the token embeddings as we are adding new special tokens to the tokenizer
+            self.text_encoder.resize_token_embeddings(len(self.tokenizer))
+            self.text_encoder_2.resize_token_embeddings(len(self.tokenizer_2))
+            token_embeds = self.text_encoder.get_input_embeddings().weight.data
+            for i, id_ in enumerate(modifier_token_id):
+                token_embeds[id_] = st['modifier_token'][modifier_tokens[i]][0]
+            token_embeds = self.text_encoder_2.get_input_embeddings().weight.data
+            for i, id_ in enumerate(modifier_token_id_2):
+                token_embeds[id_] = st['modifier_token'][modifier_tokens[i]][1]
+
+        for name, params in self.unet.named_parameters():
+            if 'attn2' in name:
+                if compress and ('to_k' in name or 'to_v' in name):
+                    params.data += st['unet'][name]['u']@st['unet'][name]['v']
+                elif name in st['unet']:
+                    params.data.copy_(st['unet'][f'{name}'])
+

@@ -12,12 +12,15 @@ import torch
 from PIL import Image
 
 sys.path.append('./')
-from src.diffusers_model_pipeline import CustomDiffusionPipeline
+from src.diffusers_model_pipeline import CustomDiffusionPipeline, CustomDiffusionXLPipeline
 
 
-def sample(ckpt, delta_ckpt, from_file, prompt, compress, batch_size, freeze_model):
+def sample(ckpt, delta_ckpt, from_file, prompt, compress, batch_size, freeze_model, sdxl=False):
     model_id = ckpt
-    pipe = CustomDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
+    if sdxl:
+        pipe = CustomDiffusionXLPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
+    else:
+        pipe = CustomDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
     pipe.load_model(delta_ckpt, compress)
 
     outdir = os.path.dirname(delta_ckpt)
@@ -63,6 +66,7 @@ def parse_args():
     parser.add_argument('--prompt', help='prompt to generate', default=None,
                         type=str)
     parser.add_argument("--compress", action='store_true')
+    parser.add_argument("--sdxl", action='store_true')
     parser.add_argument("--batch_size", default=5, type=int)
     parser.add_argument('--freeze_model', help='crossattn or crossattn_kv', default='crossattn_kv',
                         type=str)
@@ -71,4 +75,4 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    sample(args.ckpt, args.delta_ckpt, args.from_file, args.prompt, args.compress, args.batch_size, args.freeze_model)
+    sample(args.ckpt, args.delta_ckpt, args.from_file, args.prompt, args.compress, args.batch_size, args.freeze_model, args.sdxl)

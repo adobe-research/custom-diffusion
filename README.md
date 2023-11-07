@@ -7,6 +7,7 @@
 
 **[NEW!]** CustomConcept101 dataset. We release a new dataset of 101 concepts along with their evaluation prompts. For more details please refer [here](customconcept101/README.md).  
 
+**[NEW!]** Custom Diffusion with SDXL. Diffusers code now with updated diffusers==0.21.4. 
 
 <br>
 <div class="gif">
@@ -182,11 +183,11 @@ python sample.py --prompt "the <new2> cat sculpture in the style of a <new1> woo
 
 ```
 ## install requirements 
-pip install accelerate
+pip install accelerate>=0.24.1
 pip install modelcards
-pip install transformers>=4.25.1
+pip install transformers>=4.31.0
 pip install deepspeed
-pip install diffusers==0.14.0
+pip install diffusers==0.21.4
 accelerate config
 export MODEL_NAME="CompVis/stable-diffusion-v1-4"
 ```
@@ -217,7 +218,7 @@ accelerate launch src/diffusers_training.py \
 python src/diffusers_sample.py --delta_ckpt logs/cat/delta.bin --ckpt "CompVis/stable-diffusion-v1-4" --prompt "<new1> cat playing with a ball"
 ```
 
-You can also use `--enable_xformers_memory_efficient_attention` and enable `fp16` during `accelerate config` for faster training with lower VRAM requirement. 
+You can also use `--enable_xformers_memory_efficient_attention` and enable `fp16` during `accelerate config` for faster training with lower VRAM requirement. To train with SDXL use `diffusers_training_sdxl.py` with `MODEL_NAME="stabilityai/stable-diffusion-xl-base-1.0"`.
 
 **Multi-Concept fine-tuning**
 
