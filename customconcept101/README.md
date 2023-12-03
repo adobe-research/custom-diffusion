@@ -14,9 +14,8 @@ We release a dataset of 101 concepts with 3-15 images for each concept for evalu
 ## Download dataset
 
 ```
-git clone https://github.com/adobe-research/custom-diffusion.git
-cd custom-diffusion/customconcept101
-wget https://www.cs.cmu.edu/~custom-diffusion/assets/benchmark_dataset.zip
+pip install gdown
+gdown 1jj8JMtIS5-8vRtNtZ2x8isieWH9yetuK
 unzip benchmark_dataset.zip
 ```
 
