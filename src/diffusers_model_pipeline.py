@@ -414,7 +414,7 @@ class CustomDiffusionPipeline(StableDiffusionPipeline):
                          scheduler,
                          safety_checker,
                          feature_extractor,
-                         requires_safety_checker)
+                         requires_safety_checker=requires_safety_checker)
 
         # change attn class
         self.modifier_token = modifier_token

@@ -231,13 +231,13 @@ import transformers
 import diffusers
 from accelerate.logging import get_logger
 from accelerate import Accelerator
-from accelerate.utils import set_seed
+from accelerate.utils import set_seed, ProjectConfiguration
 from diffusers import AutoencoderKL, DDPMScheduler, DiffusionPipeline, UNet2DConditionModel, DPMSolverMultistepScheduler
 from diffusers.optimization import get_scheduler
 from huggingface_hub import HfFolder, Repository, create_repo, whoami
 from tqdm.auto import tqdm
 from transformers import AutoTokenizer, PretrainedConfig
-from diffusers.models.cross_attention import CrossAttention
+from diffusers.models.attention import Attention
 from diffusers.utils.import_utils import is_xformers_available
 from diffusers.utils import check_min_version, is_wandb_available
 
@@ -273,7 +273,7 @@ def create_custom_diffusion(unet, freeze_model):
     # change attn class
     def change_attn(unet):
         for layer in unet.children():
-            if type(layer) == CrossAttention:
+            if type(layer) == Attention:
                 bound_method = set_use_memory_efficient_attention_xformers.__get__(layer, layer.__class__)
                 setattr(layer, 'set_use_memory_efficient_attention_xformers', bound_method)
             else:
@@ -593,6 +593,7 @@ def get_full_repo_name(model_id: str, organization: Optional[str] = None, token:
 
 def main(args):
     logging_dir = Path(args.output_dir, args.logging_dir)
+    accelerator_project_config = ProjectConfiguration(project_dir=args.output_dir, logging_dir=logging_dir)
 
     accelerator = Accelerator(
         gradient_accumulation_steps=args.gradient_accumulation_steps,
