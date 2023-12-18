@@ -246,7 +246,7 @@ from src.diffusers_model_pipeline import CustomDiffusionAttnProcessor, CustomDif
 from src.diffusers_data_pipeline import CustomDiffusionDataset, PromptDataset, collate_fn
 from src import retrieve
 
-check_min_version("0.21.4")
+# check_min_version("0.21.4")
 
 logger = get_logger(__name__)
 
