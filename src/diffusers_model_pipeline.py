@@ -557,15 +557,15 @@ class CustomDiffusionXLPipeline(StableDiffusionXLPipeline):
         modifier_token_id: list = [],
         modifier_token_id_2: list = []
     ):
-        super().__init__(vae,
-                         text_encoder,
-                         text_encoder_2,
-                         tokenizer,
-                         tokenizer_2,
-                         unet,
-                         scheduler,
-                         force_zeros_for_empty_prompt,
-                         add_watermarker,
+        super().__init__(vae=vae,
+                         text_encoder=text_encoder,
+                         text_encoder_2=text_encoder_2,
+                         tokenizer=tokenizer,
+                         tokenizer_2=tokenizer_2,
+                         unet=unet,
+                         scheduler=scheduler,
+                         force_zeros_for_empty_prompt=force_zeros_for_empty_prompt,
+                         add_watermarker=add_watermarker,
                          )
 
         # change attn class
