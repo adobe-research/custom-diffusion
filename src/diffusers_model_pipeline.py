@@ -212,7 +212,8 @@
 #    limitations under the License.
 from typing import Callable, Optional
 import torch
-from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer, CLIPTextModelWithProjection
+from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer, CLIPTextModelWithProjection, \
+    CLIPVisionModelWithProjection, CLIPImageProcessor
 from accelerate.logging import get_logger
 
 from diffusers.models import AutoencoderKL, UNet2DConditionModel
@@ -551,22 +552,36 @@ class CustomDiffusionXLPipeline(StableDiffusionXLPipeline):
         tokenizer_2: CLIPTokenizer,
         unet: UNet2DConditionModel,
         scheduler: KarrasDiffusionSchedulers,
+        image_encoder: CLIPVisionModelWithProjection = None,
+        feature_extractor: CLIPImageProcessor = None,
         force_zeros_for_empty_prompt: bool = True,
         add_watermarker: Optional[bool] = None,
         modifier_token: list = [],
         modifier_token_id: list = [],
         modifier_token_id_2: list = []
     ):
-        super().__init__(vae=vae,
-                         text_encoder=text_encoder,
-                         text_encoder_2=text_encoder_2,
-                         tokenizer=tokenizer,
-                         tokenizer_2=tokenizer_2,
-                         unet=unet,
-                         scheduler=scheduler,
+        super().__init__(vae,
+                         text_encoder,
+                         text_encoder_2,
+                         tokenizer,
+                         tokenizer_2,
+                         unet,
+                         scheduler,
+                         image_encoder=image_encoder,
+                         feature_extractor=feature_extractor,
                          force_zeros_for_empty_prompt=force_zeros_for_empty_prompt,
                          add_watermarker=add_watermarker,
                          )
+        # super().__init__(vae,
+        #                  text_encoder,
+        #                  text_encoder_2,
+        #                  tokenizer,
+        #                  tokenizer_2,
+        #                  unet,
+        #                  scheduler,
+        #                  force_zeros_for_empty_prompt,
+        #                  add_watermarker,
+        #                  )
 
         # change attn class
         self.modifier_token = modifier_token
