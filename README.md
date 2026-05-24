@@ -30,7 +30,7 @@ In CVPR 2023 <br>
 
 All our results are based on fine-tuning [stable-diffusion-v1-4](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original) model.
 We show results on various categories of images, including scene, pet, personal toy, and style, and with a varying number of training samples. 
-For more generations and comparisons with concurrent methods, please refer to our [webpage](https://www.cs.cmu.edu/~custom-diffusion/) and [gallery](https://www.cs.cmu.edu/~custom-diffusion/results.html).
+For more generations and comparisons with concurrent methods, please refer to our [webpage](https://www.cs.cmu.edu/~custom-diffusion/) and [gallery](https://nupurkmr9.github.io/custom-diffusion/results.html).
 
 
 ### Single-Concept Results
@@ -117,17 +117,17 @@ Download the stable-diffusion model checkpoint
 `wget https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt`
 For more details, please refer [here](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original).
 
-**Dataset:** we release some of the datasets used in paper [here](https://www.cs.cmu.edu/~custom-diffusion/assets/data.zip). 
+**Dataset:** we release some of the datasets used in paper [here](https://huggingface.co/datasets/nupurkmr9/custom-diffusion/resolve/main/data.zip). 
 Images taken from UnSplash are under [UnSplash LICENSE](https://unsplash.com/license).
 
-**Models:** all our models can be downloaded from [here](https://www.cs.cmu.edu/~custom-diffusion/assets/models/). 
+**Models:** all our models can be downloaded from [here](https://huggingface.co/nupurkmr9/custom-diffusion/tree/main/models/). 
 
 ### Single-Concept Fine-tuning
 
 **Real images as regularization**
 ```
 ## download dataset
-wget https://www.cs.cmu.edu/~custom-diffusion/assets/data.zip
+wget https://huggingface.co/datasets/nupurkmr9/custom-diffusion/resolve/main/data.zip
 unzip data.zip
 
 ## run training (30 GB on 2 GPUs)

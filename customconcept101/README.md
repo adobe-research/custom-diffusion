@@ -1,6 +1,6 @@
 # CustomConcept101
 
-We release a dataset of 101 concepts with 3-15 images for each concept for evaluating model customization methods. For a more detailed view of target images please refer to our [webpage](https://www.cs.cmu.edu/~custom-diffusion/dataset.html). 
+We release a dataset of 101 concepts with 3-15 images for each concept for evaluating model customization methods. For a more detailed view of target images please refer to our [webpage](https://nupurkmr9.github.io/custom-diffusion/dataset.html). 
 
 <br>
 <div>
@@ -14,9 +14,7 @@ We release a dataset of 101 concepts with 3-15 images for each concept for evalu
 ## Download dataset
 
 ```
-pip install gdown
-gdown 1jj8JMtIS5-8vRtNtZ2x8isieWH9yetuK
-unzip benchmark_dataset.zip
+wget https://huggingface.co/datasets/nupurkmr9/custom-diffusion/resolve/main/benchmark_dataset.zip
 ```
 
 ## Evaluation
@@ -133,7 +131,7 @@ We used ChatGPT to generate 40 image captions for each concept with the instruct
 
 
 ## License
-Images taken from UnSplash are under [Unsplash License](https://unsplash.com/license). Images captured by ourselves are released under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) license. Flower category images are downloaded from Wikimedia/Flickr/Pixabay and the link to orginial images can also be found [here](https://www.cs.cmu.edu/~custom-diffusion/assets/urls.txt) for attribution.   
+Images taken from UnSplash are under [Unsplash License](https://unsplash.com/license). Images captured by ourselves are released under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) license. Flower category images are downloaded from Wikimedia/Flickr/Pixabay and the link to orginial images can also be found [here](https://github.com/nupurkmr9/custom-diffusion/blob/gh-pages/assets/urls.txt) for attribution.   
 
 
 ## Acknowledgments
