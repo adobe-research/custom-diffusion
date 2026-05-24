@@ -12,7 +12,6 @@
 #                               Apache License
 #                            Version 2.0, January 2004
 #                         http://www.apache.org/licenses/
-
 #    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 #    1. Definitions.
@@ -220,6 +219,7 @@ import logging
 import math
 import os
 import shutil
+import json
 import warnings
 from pathlib import Path
 
@@ -259,7 +259,7 @@ from src.diffusers_data_pipeline import CustomDiffusionDataset, PromptDataset, c
 from src import retrieve
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
-check_min_version("0.21.4")
+# check_min_version("0.21.4")
 
 logger = get_logger(__name__)
 
@@ -269,13 +269,13 @@ def create_custom_diffusion(unet, freeze_model):
         if freeze_model == 'crossattn':
             if 'attn2' in name:
                 params.requires_grad = True
-                print(name)
+                # print(name)
             else:
                 params.requires_grad = False
         elif freeze_model == "crossattn_kv":
             if 'attn2.to_k' in name or 'attn2.to_v' in name:
                 params.requires_grad = True
-                print(name)
+                # print(name)
             else:
                 params.requires_grad = False
         else:
@@ -830,7 +830,6 @@ def main(args):
                         sample_dataloader, desc="Generating class images", disable=not accelerator.is_local_main_process
                     ):
                         images = pipeline(example["prompt"]).images
-
                         for i, image in enumerate(images):
                             hash_image = hashlib.sha1(image.tobytes()).hexdigest()
                             image_filename = class_images_dir / f"{example['index'][i] + cur_class_images}-{hash_image}.jpg"

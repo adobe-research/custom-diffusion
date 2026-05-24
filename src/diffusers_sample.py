@@ -10,6 +10,7 @@ import os
 import numpy as np
 import torch
 from PIL import Image
+from diffusers import StableDiffusionXLPipeline
 
 sys.path.append('./')
 from src.diffusers_model_pipeline import CustomDiffusionPipeline, CustomDiffusionXLPipeline
@@ -18,11 +19,12 @@ from src.diffusers_model_pipeline import CustomDiffusionPipeline, CustomDiffusio
 def sample(ckpt, delta_ckpt, from_file, prompt, compress, batch_size, freeze_model, sdxl=False):
     model_id = ckpt
     if sdxl:
-        pipe = CustomDiffusionXLPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
+        pipe = CustomDiffusionXLPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
+        # pipe = StableDiffusionXLPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
+        pipe = pipe.to("cuda")
     else:
         pipe = CustomDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
     pipe.load_model(delta_ckpt, compress)
-
     outdir = os.path.dirname(delta_ckpt)
     generator = torch.Generator(device='cuda').manual_seed(42)
 

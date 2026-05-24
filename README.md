@@ -1,4 +1,12 @@
-# Custom Diffusion
+# Custom Diffusion for SDXL
+
+This repository is forked from Custom Diffusion.
+
+This repository fix some bugs in the original Custom Diffusion to combine with Stable Diffusion XL(SDXL).
+
+
+
+# Custom Diffusion (Original)
 
 ### [website](https://www.cs.cmu.edu/~custom-diffusion/)  | [paper](http://arxiv.org/abs/2212.04488) 
 
